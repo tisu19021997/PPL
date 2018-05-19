@@ -4,10 +4,19 @@ Template Name: Multi
 Version: 1.0
 Author: ShapeBootstrap
 Author URL: http://shapebootstrap.net
+
 */
+.error {
+  color: #ff685b;
+  display: block;
+  font-family: helvetica;
+  font-style: italic;
+  letter-spacing: 1px;
+}
 /*************************
 *******Typography******
 **************************/
+
 body {
   padding-top: 100px;
   background: #fff;
@@ -939,3 +948,4 @@ ul.nostyle i {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
+/*CUSTOM*/
