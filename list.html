@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Hospital and Doctor list</title>
+    <!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.transitions.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<header>
+    <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="scroll"><a href="index.html">Home</a></li>
+                    <li class="scroll"><a href="" data-toggle="modal" data-target="#searchModal">Search</a></li>
+                    <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
+                    <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a></li>
+                    <li class="scroll hide"><a href="#">Your Account</a></li>
+                    <li class="scroll"><a href="#">Rating</a></li>
+                    <li class="scroll active"><a href="list.html">Hospitals & Doctors</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div class="container">
+        <h1 class="display-1">
+            Doctors and Hospitals
+            <br>
+            <small class="text-muted">Connects to our website</small>
+        </h1>
+        <br>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#patient__list">Patient</a></li>
+            <li class="disabled-a"><a data-toggle="tab" href="#hospital__list">Hospital</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="patient__list" class="tab-pane fade in active">
+                <h3>Advance search for a doctor</h3>
+                <form action="/action_page.php" class="form">
+                    <div class="container-fluid">
+
+                        <!--                                                ID-->
+                        <div class="form-group">
+                            <label for="doctor__fname">Doctor's first name:</label>
+                            <input type="text" class="form-control" id="doctor__fname">
+                            <label for="doctor__lname">Doctor's last name:</label>
+                            <input type="text" class="form-control" id="doctor__lname">
+                        </div>
+
+                        <!--                        Specialty-->
+                        <div class="form-group">
+                            <label for="input__speci">Specialty</label>
+                            <select id="input__speci" class="form-control">
+                                <option selected value="14" title="Accident surgery">Accident surgery</option>
+                                <option value="1" title="Anaesthesiology and intensive-care medicine">Anaesthesiology and intensive-care medicine</option>
+                                <option value="21" title="Anatomy">Anatomy</option>
+                                <option value="41" title="Blood group serology and transfusion medicine">Blood group serology and transfusion medicine</option>
+                                <option value="53" title="Cardiac surgery">Cardiac surgery</option>
+                                <option value="97" title="Certified physician">Certified physician</option>
+                                <option value="71" title="Child and adolescent psychiatry and psychotherapeutic medicine">Child and adolescent psychiatry and psychotherapeutic medicine</option>
+                                <option value="6" title="Dermatology">Dermatology</option>
+                                <option value="43" title="Exercise physiology">Exercise physiology</option>
+                                <option value="27" title="Forensic medicine">Forensic medicine</option>
+                                <option value="98" title="General practitioner">General practitioner</option>
+                                <option value="57" title="General surgery and vascular surgery">General surgery and vascular surgery</option>
+                                <option value="4" title="Gynaecology and obstetrics">Gynaecology and obstetrics</option>
+                                <option value="22" title="Histology and embryology">Histology and embryology</option>
+                                <option value="23" title="Hygiene and microbiology">Hygiene and microbiology</option>
+                                <option value="31" title="Immunology">Immunology</option>
+                                <option value="7" title="Internal medicine">Internal medicine</option>
+                                <option value="19" title="Medical and chemical laboratory diagnostics">Medical and chemical laboratory diagnostics</option>
+                                <option value="33" title="Medical biophysics">Medical biophysics</option>
+                                <option value="32" title="Medical genetics">Medical genetics</option>
+                                <option value="20" title="Microbiological and serological laboratory diagnostics">Microbiological and serological laboratory diagnostics</option>
+                                <option value="34" title="Neurobiology">Neurobiology</option>
+                                <option value="49" title="Neurology">Neurology</option>
+                                <option value="10" title="Neurology and psychiatry">Neurology and psychiatry</option>
+                                <option value="35" title="Neuropathology">Neuropathology</option>
+                                <option value="29" title="Neurosurgery">Neurosurgery</option>
+                                <option value="45" title="Nuclear medicine">Nuclear medicine</option>
+                                <option value="40" title="Occupational medicine">Occupational medicine</option>
+                                <option value="2" title="Ophthalmology and optometry">Ophthalmology and optometry</option>
+                                <option value="44" title="Oral and maxillofacial surgery">Oral and maxillofacial surgery</option>
+                                <option value="11" title="Orthopaedics and orthopaedic surgery">Orthopaedics and orthopaedic surgery</option>
+                                <option value="5" title="Otorhinolaryngologist (ENT)">Otorhinolaryngologist (ENT)</option>
+                                <option value="55" title="Paediatric psychiatry">Paediatric psychiatry</option>
+                                <option value="8" title="Paediatrics">Paediatrics</option>
+                                <option value="42" title="Paediatric surgery">Paediatric surgery</option>
+                                <option value="24" title="Pathology">Pathology</option>
+                                <option value="36" title="Pathophysiology">Pathophysiology</option>
+                                <option value="25" title="Pharmacology and toxicology">Pharmacology and toxicology</option>
+                                <option value="12" title="Physical medicine and general rehabilitation">Physical medicine and general rehabilitation</option>
+                                <option value="26" title="Physiology">Physiology</option>
+                                <option value="30" title="Plastic, aesthetic and reconstructive surgery">Plastic, aesthetic and reconstructive surgery</option>
+                                <option value="50" title="Psychiatry">Psychiatry</option>
+                                <option value="18" title="Psychiatry and neurology">Psychiatry and neurology</option>
+                                <option value="52" title="Psychiatry and psychotherapeutic medicine">Psychiatry and psychotherapeutic medicine</option>
+                                <option value="9" title="Pulmonology">Pulmonology</option>
+                                <option value="51" title="Radiology">Radiology</option>
+                                <option value="47" title="Radiotherapy and radio-oncology">Radiotherapy and radio-oncology</option>
+                                <option value="37" title="Social medicine">Social medicine</option>
+                                <option value="46" title="Specific prophylaxis and tropical medicine">Specific prophylaxis and tropical medicine</option>
+                                <option value="3" title="Surgery">Surgery</option>
+                                <option value="28" title="Theoretical / special areas">Theoretical / special areas</option>
+                                <option value="54" title="Thoracic surgery">Thoracic surgery</option>
+                                <option value="38" title="Tumor biology">Tumor biology</option>
+                                <option value="15" title="Urology">Urology</option>
+                                <option value="48" title="Virology">Virology</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div id="hospital__list" class="tab-pane fade">
+                <h3>Search for a hospital</h3>
+                <form action="/action_page.php">
+
+                    <!--                          Hospital Name-->
+
+                    <div class="form-group">
+                        <label for="hospital__name">Hospital Name:</label>
+                        <input type="text" class="form-control" id="hospital__name">
+                    </div>
+
+                    <!--                          Hospital ID-->
+                    <div class="form-group">
+                        <label for="hospital__id">Hospital ID:</label>
+                        <input type="text" class="form-control" id="hospital__id">
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
