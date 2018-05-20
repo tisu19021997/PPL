@@ -1,4 +1,9 @@
 <?php
+/**
+ * DATABASE DEFAULT CONFIG
+ * @package ppl
+ */
+// Define database config
 define("SEVERNAME","localhost");
 define("USERNAME","root");
 define("PASSWORD","");

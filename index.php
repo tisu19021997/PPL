@@ -82,7 +82,7 @@
                                 <div class="tab-content">
                                     <div id="patient" class="tab-pane fade in active">
                                         <h3>Register a patient</h3>
-                                        <form id="regist-form" action="register.php" method="post">
+                                        <form id="regist-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 
                                             <!--                                                Name-->
                                             <div class="form-group">
