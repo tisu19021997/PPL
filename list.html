@@ -1,3 +1,6 @@
+
+     
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +83,7 @@
         <div class="tab-content">
             <div id="patient__list" class="tab-pane fade in active">
                 <h3>Advance search for a doctor</h3>
-                <form action="/action_page.php" class="form">
+                <form class="form">
                     <div class="container-fluid">
 
                         <!--                                                ID-->
@@ -152,7 +155,7 @@
                                 <option value="48" title="Virology">Virology</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button onclick="asd(1)" id="search" type="submit" class="btn btn-primary">Search</button>
                     </div>
 
                 </form>
@@ -160,7 +163,7 @@
 
             <div id="hospital__list" class="tab-pane fade">
                 <h3>Search for a hospital</h3>
-                <form action="/action_page.php">
+                <form >
 
                     <!--                          Hospital Name-->
 
@@ -177,8 +180,36 @@
 
 
 
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button onclick="asd(1)" id="search" type="submit" class="btn btn-primary" >Search</button>
+
+
+                    
                 </form>
+                <form id="asd">
+                        First name:<input type="text" name="firstname" value="FirstName">
+                        <br>
+                        Last name: <input type="text" name="lastname" value="LastName">
+                </form>
+                      
+                      <script>
+                      
+                        window.onload = function() {
+                      
+                          document.getElementById("asd").style.display = "none";
+                      
+                        };
+                      
+                        function asd(a) {
+                        
+                          if (a == 1) {
+                            document.getElementById("asd").style.display = "block";
+                          } else {
+                            document.getElementById("asd").style.display = "none";
+                          }
+                            
+                        }
+                      </script>
+                
             </div>
         </div>
     </div>
