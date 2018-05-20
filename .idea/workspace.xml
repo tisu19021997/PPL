@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24b5b7d3-334e-4dad-8b5f-000810cf09f1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/database-config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-    </list>
+    <list default="true" id="24b5b7d3-334e-4dad-8b5f-000810cf09f1" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -162,11 +159,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10834000" />
+    <option name="totallyTimeSpent" value="10874000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="412" y="226" width="964" height="561" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14240506" />
       <window_info anchor="bottom" id="TODO" order="6" />
