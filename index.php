@@ -82,7 +82,9 @@
                                 <div class="tab-content">
                                     <div id="patient" class="tab-pane fade in active">
                                         <h3>Register a patient</h3>
-                                        <form id="regist-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                                        <form id="regist-form" action="<?php echo htmlspecialchars("register.php");?>" method="post">
+
+                                            <input type='hidden' name='submitted' id='submitted' value='1'/>
 
                                             <!--                                                Name-->
                                             <div class="form-group">
@@ -105,39 +107,37 @@
                                                 <!--                                                Password-->
                                                 <div class="form-group">
                                                     <label for="passwd">Password:</label>
-                                                    <input name="password" type="password" class="form-control"
-                                                           id="passwd">
+                                                    <input name="password" type="password" class="form-control" id="passwd">
                                                 </div>
 
                                                 <!--                                                Address-->
                                                 <div class="form-group">
                                                     <label for="patient__add">Address:</label>
-                                                    <input name="address" type="text" class="form-control"
-                                                           id="patient_add">
+                                                    <input name="address" type="text" class="form-control" id="patient_add">
                                                 </div>
 
                                                 <!--                                                Gender-->
                                                 <div class="radio">
                                                     <label><input type="radio" name="optradio" value=""
-                                                                  checked="checked">Male </label>
+                                                                  checked="checked" value="Male">Male </label>
                                                 </div>
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio">Female </label>
+                                                    <label><input type="radio" name="optradio" value="Female">Female </label>
                                                 </div>
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio">Others </label>
+                                                    <label><input type="radio" name="optradio" value="Others">Others </label>
                                                 </div>
 
                                                 <!--                                                Languages-->
                                                 <div class="form-group">
                                                     <label for="input__language">Language</label>
-                                                    <select id="input__language" class="form-control">
+                                                    <select name="lang" id="input__language" class="form-control">
                                                         <option selected value="vietnamese">Vietnamese</option>
                                                         <option value="english">English</option>
                                                     </select>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button name="register" type="submit" class="btn btn-primary">Register</button>
                                         </form>
                                     </div>
                                 </div>

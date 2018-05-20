@@ -9,7 +9,7 @@ define("USERNAME","root");
 define("PASSWORD","");
 define("DBNAME","ppl");
 // Create connection
-$conn = new mysqli(SEVERNAME, USERNAME, PASSWORD);
+$conn = new mysqli(SEVERNAME, USERNAME, PASSWORD, DBNAME);
 
 // Check connection
 if ($conn->connect_error) {
