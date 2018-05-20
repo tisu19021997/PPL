@@ -7,7 +7,7 @@ $(document).ready(function() {
             id: {
                 required: true,
             },
-            email: {
+            patient_email: {
                 required: true,
                 email: true
             },
@@ -23,7 +23,7 @@ $(document).ready(function() {
             id: {
                 required: "Please enter your ID",
             },
-            email: "Please enter a valid email",
+            patient_email: "Please enter a valid email",
             password: {
                 required: "Please enter your password for the account",
             },
