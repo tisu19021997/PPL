@@ -39,20 +39,25 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 if ( isset( $_POST["register"] ) ) {
 
 	$sql = "INSERT INTO patient(id, fname, lname, gender, email, password, address, lang) 
-VALUES ('$id', '$fname', '$lname', '$gender', '$email', '$pwd', '$address','$lang')";
-	echo sql;
+VALUES ('.$id.', '.$fname.', '.$lname.', '.$gender.', '.$email.', '.$pwd.', '.$address.','.$lang.')";
 
 	//Check if id and email unique
-	$sql_stmt = "SELECT id, email FROM patient WHERE id = '$id' OR email = '$email' ";
+	$sql_stmt = "SELECT id, email FROM `patient` WHERE id = '$id' OR email = '$email'";
+	echo $sql_stmt;
+	$result   = $conn->query($sql_stmt);
 
 }
-
-if ( $conn->query( $sql ) === true ) {
+if ( $result === false) {
+	user_error("Query failed " .$conn->error. "<br>");
+}
+if ( $result->num_rows <= 0 && $conn->query( $sql ) === true ) {
 	$msg = "Thank you for registration!";
 	echo "<script type='text/javascript'>alert('$msg');</script>";
-	header( "Loca   tion: index.php" );
+	header("Location: success.php");
 } else {
-	echo " Error";
+	$msg1 = "Email or id existed. Please try another!";
+	echo "<script type='text/javascript'>alert('$msg1');</script>";
+	header("Location: fail.php");
 }
 
 $conn->close();
