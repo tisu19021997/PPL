@@ -41,7 +41,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 if ( isset( $_POST["hosregister"] ) ) {
 
 	$sql_hos = "INSERT INTO hospital(id, password, name, address, hospital_admin_name, hospital_admin_email) 
-VALUES ('$hosid', '$hosname', '$hospwd', '$hosadd', '$hosadmin', '$hosemail')";
+VALUES ('$hosid', '$hospwd', '$hosname', '$hosadd', '$hosadmin', '$hosemail')";
 	echo $sql_hos;
 	//Check if id and hospital name unique
 	$sql_stmt_hos = "SELECT id, name FROM `hospital` WHERE id = '$hosid' OR name = '$hosname'";
@@ -62,11 +62,4 @@ if ( $result_hos->num_rows <= 0 && $conn->query( $sql_hos ) === true ) {
 }
 $conn->close();
 
-//Input validation
-function test_input( $data ) {
-	$data = trim( $data );
-	$data = stripcslashes( $data );
-	$data = htmlspecialchars( $data );
 
-	return $data;
-}

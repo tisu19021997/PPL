@@ -1,6 +1,9 @@
 <?php
 //include_once "server.php";
-//?>
+include "database-config.php";
+include "session.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,11 +54,45 @@
                 <ul class="nav navbar-nav">
                     <li class="scroll active"><a href="#home">Home</a></li>
                     <li class="scroll"><a href="" data-toggle="modal" data-target="#searchModal">Search</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a></li>
-                    <li class="scroll hide"><a href="#">Your Account</a></li>
+					<?php
+
+					if ( ! isset( $_SESSION['login_user'] ) ) {
+						?>
+                        <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
+                        <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
+                        </li>
+
+						<?php
+					}
+
+					?>
                     <li class="scroll"><a href="#">Rating</a></li>
                     <li class="scroll"><a href="list.html">Hospitals & Doctors</a></li>
+					<?php
+					if ( session_status() == PHP_SESSION_ACTIVE ) {
+						if ( isset( $_SESSION['login_user'] ) ) {
+							if ( $_SESSION['login_user'] ) { ?>
+                                <li class="scroll"><a href="#">Your Account</a></li>
+                                <li class="scroll"><a href="logout.php">Sign out</a></li>
+                                <li class="scroll"><a href="#"
+                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                                </li>
+							<?php }
+						}
+
+						if ( isset( $_SESSION['login_hos'] ) ) {
+							if ( $_SESSION['login_hos'] ) { ?>
+                                <li class="scroll"><a href="#">Your Hospital</a></li>
+                                <li class="scroll"><a href="logout.php">Sign out</a></li>
+                                <li class="scroll"><a href="#"
+                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                                </li>
+								<?php
+							}
+						}
+					} ?>
+
+
                 </ul>
             </div>
 
@@ -82,7 +119,8 @@
                                 <div class="tab-content">
                                     <div id="patient" class="tab-pane fade in active">
                                         <h3>Register a patient</h3>
-                                        <form id="regist-form" action="<?php echo htmlspecialchars("register.php");?>" method="post">
+                                        <form id="regist-form"
+                                              action="<?php echo htmlspecialchars( "register.php" ); ?>" method="post">
 
                                             <input type='hidden' name='submitted' id='submitted' value='1'/>
 
@@ -101,19 +139,22 @@
                                                 <!--                                                Email-->
                                                 <div class="form-group">
                                                     <label for="email">Your email:</label>
-                                                    <input name="patient_email" type="email" class="form-control" id="email">
+                                                    <input name="patient_email" type="email" class="form-control"
+                                                           id="email">
                                                 </div>
 
                                                 <!--                                                Password-->
                                                 <div class="form-group">
                                                     <label for="passwd">Password:</label>
-                                                    <input name="password" type="password" class="form-control" id="passwd">
+                                                    <input name="password" type="password" class="form-control"
+                                                           id="passwd">
                                                 </div>
 
                                                 <!--                                                Address-->
                                                 <div class="form-group">
                                                     <label for="patient__add">Address:</label>
-                                                    <input name="address" type="text" class="form-control" id="patient_add">
+                                                    <input name="address" type="text" class="form-control"
+                                                           id="patient_add">
                                                 </div>
 
                                                 <!--                                                Gender-->
@@ -122,10 +163,12 @@
                                                                   checked="checked" value="Male">Male </label>
                                                 </div>
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio" value="Female">Female </label>
+                                                    <label><input type="radio" name="optradio" value="Female">Female
+                                                    </label>
                                                 </div>
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio" value="Others">Others </label>
+                                                    <label><input type="radio" name="optradio" value="Others">Others
+                                                    </label>
                                                 </div>
 
                                                 <!--                                                Languages-->
@@ -137,14 +180,17 @@
                                                     </select>
                                                 </div>
 
-                                                <button name="register" type="submit" class="btn btn-primary">Register</button>
+                                                <button name="register" type="submit" class="btn btn-primary">Register
+                                                </button>
                                         </form>
                                     </div>
                                 </div>
                                 <!--                                        Hospital-->
                                 <div id="hospital" class="tab-pane fade">
                                     <h3>Register a hospital</h3>
-                                    <form id="regist-form-hospital" action="<?php echo htmlspecialchars("register-hospital.php");?>" method="post">
+                                    <form id="regist-form-hospital"
+                                          action="<?php echo htmlspecialchars( "register-hospital.php" ); ?>"
+                                          method="post">
 
                                         <!--                                                Name-->
 
@@ -163,7 +209,8 @@
                                         <!--                                                Password-->
                                         <div class="form-group">
                                             <label for="hospital__pwd">Hospital Password:</label>
-                                            <input name="hospwd" type="password" class="form-control" id="hospital__pwd">
+                                            <input name="hospwd" type="password" class="form-control"
+                                                   id="hospital__pwd">
                                         </div>
 
                                         <!--                                                Address-->
@@ -222,55 +269,66 @@
                             <div class="tab-content">
                                 <div id="patient__signin" class="tab-pane fade in active">
                                     <h3>Sign in as a patient</h3>
-                                    <form action="/action_page.php">
+                                    <form id="patient__signin" action="<?php echo htmlspecialchars( "login.php" ); ?>"
+                                          method="post">
 
                                         <!--                                                ID-->
                                         <div class="form-group">
                                             <label for="patientid">Your ID:</label>
-                                            <input type="text" class="form-control" id="patientid">
+                                            <input name="myid" type="text" class="form-control" id="patientid">
                                         </div>
 
                                         <!--                                                Password-->
                                         <div class="form-group">
                                             <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd">
+                                            <input name="mypwd" type="password" class="form-control" id="pwd">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                        <button name="patient_login" type="submit" class="btn btn-primary">Sign in
+                                        </button>
                                     </form>
                                 </div>
 
                                 <!--                                        Hospital-->
                                 <div id="hospital__signin" class="tab-pane fade">
                                     <h3>Sign in as a hospital</h3>
-                                    <form action="/action_page.php">
+                                    <form id="hospital__signin"
+                                          action="<?php echo htmlspecialchars( "login-hospital.php" ); ?>"
+                                          method="POST">
+
 
                                         <!--                                                Name-->
 
-                                        <div class="form-group">
-                                            <label for="hospitalname">Hospital Name:</label>
-                                            <input type="text" class="form-control" id="hospitalname">
-                                        </div>
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label for="hospitalname">Hospital Name:</label>-->
+                                        <!--                                            <input type="text" class="form-control" id="hospitalname">-->
+                                        <!--                                        </div>-->
 
                                         <!--                                                ID-->
                                         <div class="form-group">
                                             <label for="hospitalid">Hospital ID:</label>
-                                            <input type="text" class="form-control" id="hospitalid">
+                                            <input name="hospital-id" type="text" class="form-control" id="hospitalid">
                                         </div>
 
-                                        <!--Hospital Admin Name-->
+                                        <!--                                    Password-->
                                         <div class="form-group">
-                                            <label for="hospitaladmin--name">Hospital Admin Name:</label>
-                                            <input type="email" class="form-control" id="hospitaladmin--name">
+                                            <label for="hospitalpwd">Hospital Password:</label>
+                                            <input name="hospital-pwd" type="password" class="form-control"
+                                                   id="hospitalpwd">
                                         </div>
 
-                                        <!--Hospital Admin Email-->
-                                        <div class="form-group">
-                                            <label for="hospitaladmin--email">Hospital Admin Email:</label>
-                                            <input type="email" class="form-control" id="hospitaladmin--email">
-                                        </div>
+                                        <!--                                        Hospital Admin Name-->
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label for="hospitaladmin--name">Hospital Admin Name:</label>-->
+                                        <!--                                            <input type="email" class="form-control" id="hospitaladmin--name">-->
+                                        <!--                                        </div>-->
+                                        <!--                                        Hospital Admin Email-->
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label for="hospitaladmin--email">Hospital Admin Email:</label>-->
+                                        <!--                                            <input type="email" class="form-control" id="hospitaladmin--email">-->
+                                        <!--                                        </div>-->
 
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                        <button name="login_hos" type="submit" class="btn btn-primary">Sign in</button>
                                     </form>
                                 </div>
                             </div>
@@ -382,7 +440,7 @@
 
         <div class="row">
             <div class="features">
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-line-chart"></i>
@@ -395,7 +453,7 @@
                 </div>
                 <!--/.col-md-4-->
 
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-cubes"></i>
@@ -408,7 +466,7 @@
                 </div>
                 <!--/.col-md-4-->
 
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-pie-chart"></i>
@@ -421,7 +479,7 @@
                 </div>
                 <!--/.col-md-4-->
 
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-bar-chart"></i>

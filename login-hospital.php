@@ -12,23 +12,23 @@ session_start();
 if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 	//id and password from user
-	$myid  = test_input( ( $_POST['myid'] ) );
-	$mypwd = test_input( ( $_POST['mypwd'] ) );
+	$hosid  = test_input( ( $_POST['hospital-id'] ) );
+	$hospwd = test_input( ( $_POST['hospital-pwd'] ) );
 
 }
-if ( isset( $_POST["patient_login"] ) ) {
+if ( isset( $_POST["login_hos"] ) ) {
 
-	$sql = "SELECT id, password FROM `patient` WHERE id = '$myid' AND password = '$mypwd'";
+	$sql = "SELECT id, password FROM `hospital` WHERE id = '$hosid' AND password = '$hospwd'";
 	$result = $conn->query( $sql );
 
 }
 
 if ( $result->num_rows == 1 ) {
 
-	$_SESSION['login_user'] = $myid;
+	$_SESSION['login_hos'] = $hosid;
 	?>
-    <h1>Logged in!</h1>
-    <h4>You will be redirected in 5 seconds</h4>
+	<h1>Logged in!</h1>
+	<h4>You will be redirected in 5 seconds</h4>
 
 	<?php
 	header( "refresh:5 url=index.php" );

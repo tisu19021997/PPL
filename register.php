@@ -65,12 +65,4 @@ if ( $result->num_rows <= 0 && $conn->query( $sql ) === true ) {
 
 $conn->close();
 
-//Input validation
-function test_input( $data ) {
-	$data = trim( $data );
-	$data = stripcslashes( $data );
-	$data = htmlspecialchars( $data );
-
-	return $data;
-}
 
