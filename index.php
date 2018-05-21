@@ -118,7 +118,7 @@
 
                                                 <!--                                                Gender-->
                                                 <div class="radio">
-                                                    <label><input type="radio" name="optradio" value=""
+                                                    <label><input type="radio" name="optradio"
                                                                   checked="checked" value="Male">Male </label>
                                                 </div>
                                                 <div class="radio">
@@ -144,7 +144,7 @@
                                 <!--                                        Hospital-->
                                 <div id="hospital" class="tab-pane fade">
                                     <h3>Register a hospital</h3>
-                                    <form id="regist-form-hospital" action="/action_page.php">
+                                    <form id="regist-form-hospital" action="<?php echo htmlspecialchars("register-hospital.php");?>" method="post">
 
                                         <!--                                                Name-->
 
@@ -186,7 +186,7 @@
                                             <input name="hosemail" type="email" class="form-control"
                                                    id="hospital__admin--email">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button name="hosregister" type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">

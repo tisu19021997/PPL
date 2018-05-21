@@ -8,7 +8,9 @@
 //Default database config
 include_once "database-config.php";
 
-
+/**
+ * PATIENT REGISTRATION
+ */
 //Method check and get form data
 if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
@@ -33,13 +35,14 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 	//Patient language
 	$lang = test_input( ( $_POST["lang"] ) );
+
 }
 
 //Insert into DB
 if ( isset( $_POST["register"] ) ) {
 
 	$sql = "INSERT INTO patient(id, fname, lname, gender, email, password, address, lang) 
-VALUES ('.$id.', '.$fname.', '.$lname.', '.$gender.', '.$email.', '.$pwd.', '.$address.','.$lang.')";
+VALUES ('$id', '$fname', '$lname', '$gender', '$email', '$pwd', '$address','$lang')";
 
 	//Check if id and email unique
 	$sql_stmt = "SELECT id, email FROM `patient` WHERE id = '$id' OR email = '$email'";
@@ -51,14 +54,14 @@ if ( $result === false) {
 	user_error("Query failed " .$conn->error. "<br>");
 }
 if ( $result->num_rows <= 0 && $conn->query( $sql ) === true ) {
-	$msg = "Thank you for registration!";
-	echo "<script type='text/javascript'>alert('$msg');</script>";
+
 	header("Location: success.php");
+
 } else {
-	$msg1 = "Email or id existed. Please try another!";
-	echo "<script type='text/javascript'>alert('$msg1');</script>";
+
 	header("Location: fail.php");
 }
+
 
 $conn->close();
 
