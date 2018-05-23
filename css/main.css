@@ -16,6 +16,9 @@ Author URL: http://shapebootstrap.net
   font-style: italic;
   letter-spacing: 1px;
 }
+.panel.panel-default.thumbnail {
+  margin-right: 1em;
+}
 /*************************
 *******Typography******
 **************************/

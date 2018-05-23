@@ -21,6 +21,8 @@ function test_input( $data ) {
 	$data = trim( $data );
 	$data = stripcslashes( $data );
 	$data = htmlspecialchars( $data );
+	$data = strip_tags($data);
+	$data = mysqli_real_escape_string($data);
 
 	return $data;
 }

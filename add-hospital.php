@@ -12,10 +12,11 @@ include_once "database-config.php";
 
 //Database for new connection
 /**
- * HOSPITAL REGISTRATION
+ * HOSPITAL ADD
  */
 //Method check and get form data
 if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
+
 
 //Hospital Name
 	$hosname = test_input( $_POST["hosname"] );

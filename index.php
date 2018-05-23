@@ -56,7 +56,7 @@ include "session.php";
                     <li class="scroll"><a href="" data-toggle="modal" data-target="#searchModal">Search</a></li>
 					<?php
 
-					if ( ! isset( $_SESSION['login_user'] ) ) {
+					if ( ! isset( $_SESSION['login_user'] ) &&   ! isset($_SESSION['login_hos']) ) {
 						?>
                         <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
                         <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
