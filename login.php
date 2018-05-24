@@ -18,8 +18,9 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 }
 if ( isset( $_POST["patient_login"] ) ) {
 
-	$sql = "SELECT id, password FROM `patient` WHERE id = '$myid' AND password = '$mypwd'";
+	$sql    = "SELECT id, password, status FROM `patient` WHERE id = '$myid' AND password = '$mypwd' AND status='Active'";
 	$result = $conn->query( $sql );
+	echo $sql;
 
 }
 

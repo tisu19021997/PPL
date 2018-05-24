@@ -18,7 +18,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 }
 if ( isset( $_POST["login_hos"] ) ) {
 
-	$sql = "SELECT id, password FROM `hospital` WHERE id = '$hosid' AND password = '$hospwd'";
+	$sql = "SELECT id, password FROM `hospital` WHERE id = '$hosid' AND password = '$hospwd' AND status='Active'";
 	$result = $conn->query( $sql );
 
 }

@@ -25,6 +25,8 @@
     <link href="css/owl.transitions.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -146,11 +148,6 @@
                                 <span class="pull-right-container">
                         
                     </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="">View</a></li>
-                                <li><a href="">Add </a></li>
-                            </ul>
                         </li>
                         <li class="treeview ">
                             <a href="#">
@@ -158,11 +155,6 @@
                                 <span class="pull-right-container">
                         
                     </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="">View</a></li>
-                                <li><a href="">Add </a></li>
-                            </ul>
                         </li>
                         <li class="treeview ">
                             <a href="#">
@@ -195,44 +187,50 @@
                     <h3>Patients</h3>
                 </div>
                 <div class="panel-body">
-                    <table width="100%" class="datatable table table-striped table-bordered table-hover"
-                           id="user_table">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Gender</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Address</th>
-                            <th>Language</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-						<?php include_once 'view-app.php'; ?>
-                        <tr id="new_row">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <td><input type="text" id="new_id"></td>
-                                    <td><input type="text" id="new_fname"></td>
-                                    <td><input type="text" id="new_lname"></td>
-                                    <td><input type="text" id="new_gender"></td>
-                                    <td><input type="text" id="new_email"></td>
-                                    <td><input type="text" id="new_password"></td>
-                                    <td><input type="text" id="new_address"></td>
-                                    <td><input type="text" id="new_lang"></td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a class="btn btn-success" onclick="insert_row();">
-                                                <i class="fa fa-plus"></i> Add Patient </a>
-                                        </div>
-                                        <!--<input type="button" value="Insert Row" onclick="insert_row();"></td>-->
+                    <div class="table-responsive">
+                        <table width="100%" class="table-fit datatable table table-striped table-bordered table-hover"
+                               id="user_table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Address</th>
+                                <th>Language</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+							<?php include_once 'view-app.php'; ?>
+                            <tr id="new_row">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <td></td>
+                                        <td><input required type="text" id="new_id"></td>
+                                        <td><input required type="text" id="new_fname"></td>
+                                        <td><input required type="text" id="new_lname"></td>
+                                        <td><input required type="text" id="new_gender"></td>
+                                        <td><input required type="text" id="new_email"></td>
+                                        <td><input required type="text" id="new_password"></td>
+                                        <td><input required type="text" id="new_address"></td>
+                                        <td><input required type="text" id="new_lang"></td>
+                                        <td><input required type="text" id="new_status"></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="btn btn-success" onclick="insert_row();">
+                                                    <i class="fa fa-plus"></i> Add Patient </a>
+                                            </div>
+                                            <!--<input type="button" value="Insert Row" onclick="insert_row();"></td>-->
+                                    </div>
                                 </div>
-                            </div>
-                        </tr>
-                        </tbody>
-                    </table>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
