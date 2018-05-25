@@ -16,6 +16,7 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
+
 //Input validation
 function test_input( $data ) {
 	$data = trim( $data );
@@ -25,5 +26,3 @@ function test_input( $data ) {
 
 	return $data;
 }
-
-?>

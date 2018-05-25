@@ -1,4 +1,5 @@
 <?php include_once 'database-config.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +31,8 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/modify_record.js"></script>
+    //Modify record
+    <script src="js/modify_record_hospital.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -145,21 +147,21 @@
                             <a href="#">
                                 <i class="fa fa-user-md"></i> <span>Patient</span>
                                 <span class="pull-right-container">
-                        
+
                     </span>
                         </li>
                         <li class="treeview ">
                             <a href="#">
                                 <i class="fa fa-user-md"></i> <span>Hospital</span>
                                 <span class="pull-right-container">
-                        
+
                     </span>
                         </li>
                         <li class="treeview ">
                             <a href="#">
                                 <i class="fa fa-sitemap"></i> <span>Specialty category</span>
                                 <span class="pull-right-container">
-                       
+
                     </span>
                             </a>
                         </li>
@@ -168,7 +170,7 @@
                             <a href="#">
                                 <i class="fa fa-sitemap"></i> <span>Rating and comment</span>
                                 <span class="pull-right-container">
-                        
+
                     </span>
                             </a>
                         </li>
@@ -193,35 +195,29 @@
                             <tr>
                                 <th></th>
                                 <th>ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Gender</th>
-                                <th>Email</th>
-                                <th>Password</th>
+                                <th>Name</th>
                                 <th>Address</th>
-                                <th>Language</th>
+                                <th>Hospital Admin Name</th>
+                                <th>Hospital Admin Email</th>
                                 <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
-							<?php include_once 'view-app.php'; ?>
+							<?php include_once 'view-hospital-app.php'; ?>
                             <tr id="new_row">
                                 <div class="form-row">
                                     <div class="form-group">
                                         <td></td>
                                         <td><input required type="text" id="new_id"></td>
-                                        <td><input required type="text" id="new_fname"></td>
-                                        <td><input required type="text" id="new_lname"></td>
-                                        <td><input required type="text" id="new_gender"></td>
-                                        <td><input required type="text" id="new_email"></td>
-                                        <td><input required type="text" id="new_password"></td>
+                                        <td><input required type="text" id="new_name"></td>
                                         <td><input required type="text" id="new_address"></td>
-                                        <td><input required type="text" id="new_lang"></td>
-                                        <td>Active</td>
+                                        <td><input required type="text" id="new_hosadmin"></td>
+                                        <td><input required type="text" id="new_hosadminemail"></td>
+                                        <td><input required type="text" id="new_status"></td>
                                         <td>
                                             <div class="btn-group">
                                                 <a class="btn btn-success" onclick="insert_row();">
-                                                    <i class="fa fa-plus"></i> Add Patient </a>
+                                                    <i class="fa fa-plus"></i> Add Hospital </a>
                                             </div>
                                         </td>
                                             <!--<input type="button" value="Insert Row" onclick="insert_row();"></td>-->

@@ -52,6 +52,7 @@ return $data;
 
 function create_table($querry){
 	global $table_sql;
+	global $object;
 	$table_sql=$querry;
 	include 'ppl-table.php';
 }

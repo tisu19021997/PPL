@@ -42,7 +42,7 @@ if ( isset( $_POST['insert_row'] ) ) {
 	$password = $_POST['password_val'];
 	$address  = $_POST['address_val'];
 	$lang     = $_POST['lang_val'];
-	mysqli_query( $conn, "insert into patient values('$id','$fname','$lname','$gender','$email','$password','$address','$lang')" );
+	mysqli_query( $conn, "insert into patient values('$id','$fname','$lname','$gender','$email','$password','$address','$lang', 'Active')" );
 	echo mysqli_insert_id( $conn );
 	exit();
 }

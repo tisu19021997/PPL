@@ -23,22 +23,16 @@
 // });
 function edit_row(id) {
     var id = document.getElementById("id_val" + id).innerHTML;
-    var lname = document.getElementById("lname_val" + id).innerHTML;
-    var fname = document.getElementById("fname_val" + id).innerHTML;
-    var gender = document.getElementById("gender_val" + id).innerHTML;
-    var email = document.getElementById("email_val" + id).innerHTML;
-    var password = document.getElementById("password_val" + id).innerHTML;
+    var name = document.getElementById("name_val" + id).innerHTML;
     var address = document.getElementById("address_val" + id).innerHTML;
-    var lang = document.getElementById("lang_val" + id).innerHTML;
+    var hosadmin = document.getElementById("hosadmin_val" + id).innerHTML;
+    var hosadminemail = document.getElementById("hosadminemail_val" + id).innerHTML;
 
     document.getElementById("id_val" + id).innerHTML = "<input type='text' id='id_text" + id + "' value='" + id + "'>";
-    document.getElementById("lname_val" + id).innerHTML = "<input type='text' id='lname_text" + id + "' value='" + lname + "'>";
-    document.getElementById("fname_val" + id).innerHTML = "<input type='text' id='fname_text" + id + "' value='" + fname + "'>";
-    document.getElementById("gender_val" + id).innerHTML = "<input type='text' id='gender_text" + id + "' value='" + gender + "'>";
-    document.getElementById("email_val" + id).innerHTML = "<input type='text' id='email_text" + id + "' value='" + email + "'>";
-    document.getElementById("password_val" + id).innerHTML = "<input type='text' id='password_text" + id + "' value='" + password + "'>";
+    document.getElementById("name_val" + id).innerHTML = "<input type='text' id='name_text" + id + "' value='" + name + "'>";
+    document.getElementById("hosadmin_val" + id).innerHTML = "<input type='text' id='hosadmin_text" + id + "' value='" + hosadmin + "'>";
+    document.getElementById("hosadminemail_val" + id).innerHTML = "<input type='text' id='hosadminemail_text" + id + "' value='" + hosadminemail + "'>";
     document.getElementById("address_val" + id).innerHTML = "<input type='text' id='address_text" + id + "' value='" + address + "'>";
-    document.getElementById("lang_val" + id).innerHTML = "<input type='text' id='lang_text" + id + "' value='" + lang + "'>";
 
     document.getElementById("edit_button" + id).style.display = "none";
     document.getElementById("save_button" + id).style.display = "inline-block";
@@ -186,7 +180,8 @@ function insert_row() {
     var email = document.getElementById("new_email").value;
     var password = document.getElementById("new_password").value;
     var address = document.getElementById("new_address").value;
-    var lang = document.getElementById("new_lang").value;;
+    var lang = document.getElementById("new_lang").value;
+    var status = document.getElementById("new_status").value;
 
     $.ajax
     ({
@@ -202,6 +197,7 @@ function insert_row() {
             password_val: password,
             address_val: address,
             lang_val: lang,
+            status_val: status,
         },
         success: function (response) {
             if (response != "") {
@@ -219,7 +215,7 @@ function insert_row() {
                     "<td id='password_val" + id + "'>" + password + "</td>" +
                     "<td id='address_val" + id + "'>" + address + "</td>" +
                     "<td id='lang_val" + id + "'>" + lang + "</td>" +
-                    "<td id='status_val" + id + "'>Active</td>" +
+                    "<td id='status_val" + id + "'>" + status + "</td>" +
                     "<td class='center'>" +
                     "<div class='btn-group-xs'>" +
                     "<button type='button' class='btn btn-xs btn-primary' id='edit_button" + id + "' " +
