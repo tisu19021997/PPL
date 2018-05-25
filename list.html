@@ -155,7 +155,7 @@
                                 <option value="48" title="Virology">Virology</option>
                             </select>
                         </div>
-                        <button onclick="asd(1)" id="search" type="submit" class="btn btn-primary">Search</button>
+                        <button onclick="myFunction()" id="search1"  class="btn btn-primary">Search</button>
                     </div>
 
                 </form>
@@ -180,35 +180,36 @@
 
 
 
-                    <button onclick="asd(1)" id="search" type="submit" class="btn btn-primary" >Search</button>
+                    <button onclick="myFunction()" id="search"  class="btn btn-primary" >Search</button>
 
 
                     
                 </form>
-                <form id="asd">
-                        First name:<input type="text" name="firstname" value="FirstName">
-                        <br>
-                        Last name: <input type="text" name="lastname" value="LastName">
-                </form>
-                      
-                      <script>
-                      
-                        window.onload = function() {
-                      
-                          document.getElementById("asd").style.display = "none";
-                      
-                        };
-                      
-                        function asd(a) {
-                        
-                          if (a == 1) {
-                            document.getElementById("asd").style.display = "block";
-                          } else {
-                            document.getElementById("asd").style.display = "none";
-                          }
-                            
-                        }
-                      </script>
+                <form id="1" style="display: none;">
+                    <label for="hospitalID">ID:</label>
+                    <input type="text" class="form-control" id="hospitalID">
+                    <br>
+                    <label for="hospitalName">Name:</label>
+                    <input type="text" class="form-control" id="hospitalName">
+                    <br>
+                    <label for="hospitalAddress">Address:</label>
+                    <input type="text" class="form-control" id="hospitalAddress">
+                    <br>
+                    <label for="hospitalWebsite">Website:</label>
+                    <input type="text" class="form-control" id="hospitalWebsite">
+                    <br>
+                    <label for="hospitalAdminName">Admin Name:</label>
+                    <input type="text" class="form-control" id="hospitalAdminName">
+                    <br>
+                    <label for="hospitalAdminEmail">Admin Email:</label>
+                    <input type="text" class="form-control" id="hospitalAdminEmail">
+                    <br>
+                </form>    
+                <script>
+                    function myFunction() {
+                        document.getElementById("1").style.display = "block";
+                    }
+                </script>
                 
             </div>
         </div>
