@@ -31,7 +31,7 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.js"></script>
-    //Modify record
+<!--    //Modify record-->
     <script src="js/modify_record_hospital.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -195,6 +195,7 @@
                             <tr>
                                 <th></th>
                                 <th>ID</th>
+                                <th>Password</th>
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Hospital Admin Name</th>
@@ -210,13 +211,14 @@
                                         <td></td>
                                         <td><input required type="text" id="new_id"></td>
                                         <td><input required type="text" id="new_name"></td>
+                                        <td><input required type="text" id="new_password"></td>
                                         <td><input required type="text" id="new_address"></td>
                                         <td><input required type="text" id="new_hosadmin"></td>
-                                        <td><input required type="text" id="new_hosadminemail"></td>
-                                        <td><input required type="text" id="new_status"></td>
+                                        <td><input required type="email" id="new_hosadminemail"></td>
+                                        <td id="new_status">Active</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-success" onclick="insert_row();">
+                                                <a class="btn btn-success" onclick="insert_row_hos();">
                                                     <i class="fa fa-plus"></i> Add Hospital </a>
                                             </div>
                                         </td>

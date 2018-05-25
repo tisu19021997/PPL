@@ -26,6 +26,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 	//Patient password
 	$pwd = test_input( $_POST["password"] );
+	//Password hash
+	$hashed_password = password_hash($pwd,PASSWORD_DEFAULT);
 
 	//Patient address
 	$address = test_input( ( $_POST["address"] ) );
@@ -42,7 +44,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 if ( isset( $_POST["register"] ) ) {
 
 	$sql = "INSERT INTO patient(id, fname, lname, gender, email, password, address, lang) 
-VALUES ('$id', '$fname', '$lname', '$gender', '$email', '$pwd', '$address','$lang')";
+VALUES ('$id', '$fname', '$lname', '$gender', '$email', '$hashed_password', '$address','$lang')";
 
 	//Check if id and email unique
 	$sql_stmt = "SELECT id, email FROM `patient` WHERE id = '$id' OR email = '$email'";

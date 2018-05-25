@@ -21,15 +21,17 @@
 //
 //     });
 // });
-function edit_row(id) {
+function edit_row_hos(id) {
     var id = document.getElementById("id_val" + id).innerHTML;
     var name = document.getElementById("name_val" + id).innerHTML;
+    var password = document.getElementById("password_val" + id).innerHTML;
     var address = document.getElementById("address_val" + id).innerHTML;
     var hosadmin = document.getElementById("hosadmin_val" + id).innerHTML;
     var hosadminemail = document.getElementById("hosadminemail_val" + id).innerHTML;
 
     document.getElementById("id_val" + id).innerHTML = "<input type='text' id='id_text" + id + "' value='" + id + "'>";
     document.getElementById("name_val" + id).innerHTML = "<input type='text' id='name_text" + id + "' value='" + name + "'>";
+    document.getElementById("password_val" + id).innerHTML = "<input type='text' id='password_text" + id + "' value='" + password + "'>";
     document.getElementById("hosadmin_val" + id).innerHTML = "<input type='text' id='hosadmin_text" + id + "' value='" + hosadmin + "'>";
     document.getElementById("hosadminemail_val" + id).innerHTML = "<input type='text' id='hosadminemail_text" + id + "' value='" + hosadminemail + "'>";
     document.getElementById("address_val" + id).innerHTML = "<input type='text' id='address_text" + id + "' value='" + address + "'>";
@@ -38,17 +40,16 @@ function edit_row(id) {
     document.getElementById("save_button" + id).style.display = "inline-block";
 }
 
-function save_row(id) {
+function save_row_hos(id) {
     var id = document.getElementById("id_text" + id).value;
-    var lname = document.getElementById("lname_text" + id).value;
-    var fname = document.getElementById("fname_text" + id).value;
-    var gender = document.getElementById("gender_text" + id).value;
-    var email = document.getElementById("email_text" + id).value;
+    var name = document.getElementById("name_text" + id).value;
     var password = document.getElementById("password_text" + id).value;
+    var hosadminemail = document.getElementById("hosadminemail_text" + id).value;
+    var hosadmin = document.getElementById("hosadmin_text" + id).value;
     var address = document.getElementById("address_text" + id).value;
-    var lang = document.getElementById("lang_text" + id).value;
     if (id === "") {
-        console.log('fail');
+        alert('ID can not be null');
+        event.preventDefault();
     }
 
     $.ajax
@@ -56,27 +57,25 @@ function save_row(id) {
         type: 'POST',
         url: 'modify_records.php',
         data: {
-            edit_row: 'edit_row',
+            edit_row_hos: 'edit_row_hos',
             row_id: id,
             id_val: id,
-            lname_val: lname,
-            fname_val: fname,
-            gender_val: gender,
-            email_val: email,
             password_val: password,
+            name_val: name,
+            hosadminemail_val: hosadminemail,
+            hosadmin_val: hosadmin,
             address_val: address,
-            lang_val: lang,
+
         },
         success: function (response) {
             console.log(response);
             document.getElementById("id_val" + id).innerHTML = id;
-            document.getElementById("lname_val" + id).innerHTML = lname;
-            document.getElementById("fname_val" + id).innerHTML = fname;
-            document.getElementById("gender_val" + id).innerHTML = gender;
-            document.getElementById("email_val" + id).innerHTML = email;
+            document.getElementById("name_val" + id).innerHTML = name;
             document.getElementById("password_val" + id).innerHTML = password;
+            document.getElementById("hosadmin_val" + id).innerHTML = hosadmin;
+            document.getElementById("hosadminemail_val" + id).innerHTML = hosadminemail;
             document.getElementById("address_val" + id).innerHTML = address;
-            document.getElementById("lang_val" + id).innerHTML = lang;
+
             document.getElementById("edit_button" + id).style.display = "inline-block";
             document.getElementById("save_button" + id).style.display = "none";
             console.log("Success");
@@ -88,7 +87,7 @@ function save_row(id) {
     });
 }
 
-function delete_row(id) {
+function delete_row_hos(id) {
     var id = document.getElementById("id_val" + id).innerHTML;
     var row = document.getElementById("row" + id);
     console.log(row);
@@ -97,7 +96,7 @@ function delete_row(id) {
             type: 'POST',
             url: 'modify_records.php',
             data: {
-                delete_row: 'delete_row',
+                delete_row_hos: 'delete_row_hos',
                 row_id: id,
             },
             success: function (response) {
@@ -115,7 +114,7 @@ function delete_row(id) {
     );
 }
 
-function active_row(id) {
+function active_row_hos(id) {
     var id = document.getElementById("id_val" + id).innerHTML;
     var status = document.getElementById("status_val" + id).innerHTML;
     var row = document.getElementById("row" + id);
@@ -124,7 +123,7 @@ function active_row(id) {
         type: 'POST',
         url: 'modify_records.php',
         data: {
-            active_row: 'active_row',
+            active_row_hos: 'active_row_hos',
             row_id: id,
             status_val: status,
 
@@ -143,7 +142,7 @@ function active_row(id) {
 
 };
 
-function deactive_row(id) {
+function deactive_row_hos(id) {
     var id = document.getElementById("id_val" + id).innerHTML;
     var status = document.getElementById("status_val" + id).innerHTML;
     console.log(status);
@@ -153,7 +152,7 @@ function deactive_row(id) {
         type: 'POST',
         url: 'modify_records.php',
         data: {
-            deactive_row: 'deactive_row',
+            deactive_row_hos: 'deactive_row_hos',
             row_id: id,
             status_val: status,
 
@@ -172,31 +171,27 @@ function deactive_row(id) {
 
 };
 
-function insert_row() {
+function insert_row_hos() {
     var id = document.getElementById("new_id").value;
-    var lname = document.getElementById("new_lname").value;
-    var fname = document.getElementById("new_fname").value;
-    var gender = document.getElementById("new_gender").value;
-    var email = document.getElementById("new_email").value;
+    var name = document.getElementById("new_name").value;
     var password = document.getElementById("new_password").value;
     var address = document.getElementById("new_address").value;
-    var lang = document.getElementById("new_lang").value;
-    var status = document.getElementById("new_status").value;
+    var hosadmin = document.getElementById("new_hosadmin").value;
+    var hosadminemail = document.getElementById("new_hosadminemail").value;
+    var status = document.getElementById("new_status").innerHTML;
 
     $.ajax
     ({
         type: 'post',
         url: 'modify_records.php',
         data: {
-            insert_row: 'insert_row',
+            insert_row_hos: 'insert_row_hos',
             id_val: id,
-            lname_val: lname,
-            fname_val: fname,
-            gender_val: gender,
-            email_val: email,
+            name_val: name,
             password_val: password,
             address_val: address,
-            lang_val: lang,
+            hosadmin_val: hosadmin,
+            hosadminemail_val: hosadminemail,
             status_val: status,
         },
         success: function (response) {
@@ -208,49 +203,44 @@ function insert_row() {
                     "<tr style='background-color:#abe0ab;' class='odd GradeX' id='row" + id + "'>" +
                     "<td><input type='checkbox' id='check_val" + id + "'></td>" +
                     "<td id='id_val" + id + "'>" + id + "</td>" +
-                    "<td id='fname_val" + id + "'>" + fname + "</td>" +
-                    "<td id='lname_val" + id + "'>" + lname + "</td>" +
-                    "<td id='gender_val" + id + "'>" + gender + "</td>" +
-                    "<td id='email_val" + id + "'>" + email + "</td>" +
+                    "<td id='name_val" + id + "'>" + name + "</td>" +
                     "<td id='password_val" + id + "'>" + password + "</td>" +
                     "<td id='address_val" + id + "'>" + address + "</td>" +
-                    "<td id='lang_val" + id + "'>" + lang + "</td>" +
-                    "<td id='status_val" + id + "'>" + status + "</td>" +
+                    "<td id='hosadmin_val" + id + "'>" + hosadmin + "</td>" +
+                    "<td id='hosadminemail_val" + id + "'>" + hosadminemail + "</td>" +
+                    "<td id='status_val" + id + "'>Active</td>" +
                     "<td class='center'>" +
                     "<div class='btn-group-xs'>" +
-                    "<button type='button' class='btn btn-xs btn-primary' id='edit_button" + id + "' " +
-                    "onclick=edit_row('" + id + "'); >" +
+                    "<button title='Edit' type='button' class='btn btn-xs btn-primary' id='edit_button" + id + "' " +
+                    "onclick=edit_row_hos('" + id + "'); >" +
                     "<i class='fa fa-edit'></i> " +
                     "</button>" +
-                    "<button type='button' style='display:none;' class='btn btn-xs btn-primary' id='save_button" + id + "' " +
-                    "onclick=save_row('" + id + "');>" +
+                    "<button title='Save' type='button' style='display:none;' class='btn btn-xs btn-primary' id='save_button" + id + "' " +
+                    "onclick=save_row_hos('" + id + "');>" +
                     "<i class='fa fa-save'></i> " +
                     "</button>" +
-                    "<button type='button' class='btn btn-xs btn-danger' id='delete_button" + id + "' " +
-                    "onclick=delete_row('" + id + "'); >" +
+                    "<button title='Delete' type='button' class='btn btn-xs btn-danger' id='delete_button" + id + "' " +
+                    "onclick=delete_row_hos('" + id + "'); >" +
                     "<i class='fa fa-trash'></i> " +
                     "</button>" +
                     "<button title='Active' style='display:none;' type='button' class='btn btn-xs btn-warning' id='active_button" + id + "'" +
-                    "onclick=active_row('" + id + "'); >" +
+                    "onclick=active_row_hos('" + id + "'); >" +
                     "<i class='fa fa-check'></i>" +
                     "</button>" +
                     "<button title='Deactive' type='button' class='btn btn-xs btn-warning' id='deactive_button" + id + "'" +
-                    "onclick=deactive_row('" + id + "'); >" +
+                    "onclick=deactive_row_hos('" + id + "'); >" +
                     "<i class='fa fa-ban'></i>" +
                     "</button>" +
-                    "</div> "+
+                    "</div> " +
                     "</td>" +
                     "</tr>";
 
 
                 document.getElementById("new_id").value = '';
-                document.getElementById("new_lname").value = '';
-                document.getElementById("new_fname").value = '';
-                document.getElementById("new_gender").value = '';
-                document.getElementById("new_email").value = '';
-                document.getElementById("new_password").value = '';
+                document.getElementById("new_name").value = '';
                 document.getElementById("new_address").value = '';
-                document.getElementById("new_lang").value = '';
+                document.getElementById("new_hosadmin").value = '';
+                document.getElementById("new_hosadminemail").value = '';
             }
         }
     });

@@ -29,14 +29,12 @@ if ( isset( $_POST["change_password"] ) ) {
 	$resultset = $conn->query( $sql_stmt );
 	$list      = mysqli_fetch_assoc( $resultset );
 	extract( $list );
-	$pwd = $password;
-//	print_r( $pwd );
-
-
-	if ( $newpwd === $conpwd && $newpwd !== $oldpwd && $oldpwd === $pwd ) {
+	$verify = password_verify( $oldpwd, $list['password'] );
+	$duplicate = password_verify($newpwd, $list['password']);
+	if ( $newpwd === $conpwd && !$duplicate && $verify ) {
 		if ( session_status() == PHP_SESSION_ACTIVE ) {
-
-			$sql    = "UPDATE patient SET password='$newpwd' WHERE id='$login_session'";
+			$hashed_password = password_hash($newpwd,PASSWORD_DEFAULT);
+			$sql    = "UPDATE patient SET password='$hashed_password' WHERE id='$login_session'";
 			$result = $conn->query( $sql );
 
 		}

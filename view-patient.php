@@ -220,7 +220,7 @@
                                         <td>Active</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-success" onclick="insert_row();">
+                                                <a class="btn btn-success" onclick="insert_row_hos();">
                                                     <i class="fa fa-plus"></i> Add Patient </a>
                                             </div>
                                         </td>
