@@ -25,6 +25,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 //Hospital password
 	$hospwd = test_input( $_POST["hospwd"] );
+	//Password hash
+	$hashed_password = password_hash( $hospwd, PASSWORD_DEFAULT );
 
 //Hospital address
 	$hosadd = test_input( ( $_POST["hosadd"] ) );
@@ -38,7 +40,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 if ( isset( $_POST["hosregister"] ) ) {
 
 	$sql_hos = "INSERT INTO hospital(id, password, name, address, hospital_admin_name, hospital_admin_email) 
-VALUES ('$hosid', '$hospwd', '$hosname', '$hosadd', '$hosadmin', '$hosemail')";
+VALUES ('$hosid', '$hashed_password', '$hosname', '$hosadd', '$hosadmin', '$hosemail')";
 	echo $sql_hos;
 	//Check if id and hospital name unique
 	$sql_stmt_hos = "SELECT id, name FROM `hospital` WHERE id = '$hosid' OR name = '$hosname'";

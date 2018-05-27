@@ -1,6 +1,6 @@
 <?php
-    if(isset($lname))  {
-?>
+if ( isset( $email ) ) {
+	?>
     <tr class="odd gradeX" id="row<?php echo $id; ?>">
         <td><input type="checkbox" id="check_val<?php echo $id; ?>"></td>
         <td id="id_val<?php echo $id; ?>"><?php echo $id; ?></td>
@@ -45,15 +45,12 @@
             </div>
         </td>
     </tr>
-<?php }
-
-
-else if(isset($hospital_admin_name)) { ?>
+<?php } else if ( isset( $hospital_admin_name ) ) { ?>
 
     <tr class="odd gradeX" id="row<?php echo $id; ?>">
         <td><input type="checkbox" id="check_val<?php echo $id; ?>"></td>
         <td id="id_val<?php echo $id; ?>"><?php echo $id; ?></td>
-        <td  id="password_val<?php echo $id;?>"><?php echo $password;?></td>
+        <td id="password_val<?php echo $id; ?>"><?php echo $password; ?></td>
         <td id="name_val<?php echo $id; ?>"><?php echo $name; ?></td>
         <td id="address_val<?php echo $id; ?>"><?php echo $address; ?></td>
         <td id="hosadmin_val<?php echo $id; ?>"><?php echo $hospital_admin_name; ?></td>
@@ -92,4 +89,68 @@ else if(isset($hospital_admin_name)) { ?>
             </div>
         </td>
     </tr>
-<?php } ?>
+
+<?php }
+
+else if ( isset( $gen_specialty ) ) { ?>
+    <tr class="odd gradeX" id="row<?php echo $id; ?>">
+        <td><input type="checkbox" id="del_<?php echo $id; ?>"></td>
+        <td id="id_val<?php echo $id; ?>"><?php echo $id; ?></td>
+        <td id="name_val<?php echo $id; ?>"><?php echo $name; ?></td>
+        <td id="gen_val<?php echo $id; ?>"><?php echo $gen_specialty; ?></td>
+        <td class="center">
+            <div class="btn-group-xs">
+
+                <button title="Edit" type="button" class="btn btn-xs btn-primary" id="edit_button<?php echo $id; ?>"
+                        onclick="edit_row_gen('<?php echo $id; ?>');"><i
+                            class="fa fa-edit"></i></button>
+
+                <button title="Save" type="button" style="display:none;" class="btn btn-xs btn-primary"
+                        id="save_button<?php echo $id; ?>"
+                        onclick="save_row_gen('<?php echo $id; ?>');"><i
+                            class="fa fa-save"></i></button>
+
+                <button title="Delete" type="button" class="btn btn-xs btn-danger" id="delete_button<?php echo $id; ?>"
+                        onclick="delete_row_gen('<?php echo $id; ?>');"><i
+                            class="fa fa-trash"></i></button>
+
+            </div>
+        </td>
+    </tr>
+
+<?php }
+
+ else if ( isset( $accepted_ins ) ) { ?>
+    <tr class="odd gradeX" id="row<?php echo $id; ?>">
+        <td><input type="checkbox" id="del_<?php echo $id; ?>"></td>
+        <td id="id_val<?php echo $id; ?>"><?php echo $id; ?></td>
+        <td id="lname_val<?php echo $id; ?>"><?php echo $lname; ?></td>
+        <td id="fname_val<?php echo $id; ?>"><?php echo $fname; ?></td>
+        <td id="gender_val<?php echo $id; ?>"><?php echo $gender; ?></td>
+        <td id="degree_val<?php echo $id; ?>"><?php echo $degree; ?></td>
+        <td id="accept_ins_val<?php echo $id; ?>"><?php echo $accepted_ins; ?></td>
+        <td id="specific_specialty_val<?php echo $id; ?>"><?php echo $specific_specialty; ?></td>
+        <td id="office_hours_val<?php echo $id; ?>"><?php echo $office_hours; ?></td>
+        <td id="lang_val<?php echo $id; ?>"><?php echo $lang; ?></td>
+        <td id="hosname_val<?php echo $id; ?>"><?php echo $hosname; ?></td>
+        <td class="center">
+            <div class="btn-group-xs">
+
+                <button title="Edit" type="button" class="btn btn-xs btn-primary" id="edit_button<?php echo $id; ?>"
+                        onclick="edit_row_doc('<?php echo $id; ?>');"><i
+                            class="fa fa-edit"></i></button>
+
+                <button title="Save" type="button" style="display:none;" class="btn btn-xs btn-primary"
+                        id="save_button<?php echo $id; ?>"
+                        onclick="save_row_doc('<?php echo $id; ?>');"><i
+                            class="fa fa-save"></i></button>
+
+                <button title="Delete" type="button" class="btn btn-xs btn-danger" id="delete_button<?php echo $id; ?>"
+                        onclick="delete_row_doc('<?php echo $id; ?>');"><i
+                            class="fa fa-trash"></i></button>
+
+            </div>
+        </td>
+    </tr>
+
+<?php }

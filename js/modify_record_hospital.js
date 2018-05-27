@@ -24,14 +24,14 @@
 function edit_row_hos(id) {
     var id = document.getElementById("id_val" + id).innerHTML;
     var name = document.getElementById("name_val" + id).innerHTML;
-    var password = document.getElementById("password_val" + id).innerHTML;
+    // var password = document.getElementById("password_val" + id).innerHTML;
     var address = document.getElementById("address_val" + id).innerHTML;
     var hosadmin = document.getElementById("hosadmin_val" + id).innerHTML;
     var hosadminemail = document.getElementById("hosadminemail_val" + id).innerHTML;
 
     document.getElementById("id_val" + id).innerHTML = "<input type='text' id='id_text" + id + "' value='" + id + "'>";
     document.getElementById("name_val" + id).innerHTML = "<input type='text' id='name_text" + id + "' value='" + name + "'>";
-    document.getElementById("password_val" + id).innerHTML = "<input type='text' id='password_text" + id + "' value='" + password + "'>";
+    // document.getElementById("password_val" + id).innerHTML = "<input type='text' id='password_text" + id + "' value='" + password + "'>";
     document.getElementById("hosadmin_val" + id).innerHTML = "<input type='text' id='hosadmin_text" + id + "' value='" + hosadmin + "'>";
     document.getElementById("hosadminemail_val" + id).innerHTML = "<input type='text' id='hosadminemail_text" + id + "' value='" + hosadminemail + "'>";
     document.getElementById("address_val" + id).innerHTML = "<input type='text' id='address_text" + id + "' value='" + address + "'>";
@@ -43,7 +43,7 @@ function edit_row_hos(id) {
 function save_row_hos(id) {
     var id = document.getElementById("id_text" + id).value;
     var name = document.getElementById("name_text" + id).value;
-    var password = document.getElementById("password_text" + id).value;
+    // var password = document.getElementById("password_text" + id).value;
     var hosadminemail = document.getElementById("hosadminemail_text" + id).value;
     var hosadmin = document.getElementById("hosadmin_text" + id).value;
     var address = document.getElementById("address_text" + id).value;
@@ -60,7 +60,7 @@ function save_row_hos(id) {
             edit_row_hos: 'edit_row_hos',
             row_id: id,
             id_val: id,
-            password_val: password,
+            // password_val: password,
             name_val: name,
             hosadminemail_val: hosadminemail,
             hosadmin_val: hosadmin,
@@ -71,7 +71,7 @@ function save_row_hos(id) {
             console.log(response);
             document.getElementById("id_val" + id).innerHTML = id;
             document.getElementById("name_val" + id).innerHTML = name;
-            document.getElementById("password_val" + id).innerHTML = password;
+            // document.getElementById("password_val" + id).innerHTML = password;
             document.getElementById("hosadmin_val" + id).innerHTML = hosadmin;
             document.getElementById("hosadminemail_val" + id).innerHTML = hosadminemail;
             document.getElementById("address_val" + id).innerHTML = address;

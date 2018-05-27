@@ -8,30 +8,30 @@ include "session.php";
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>PPL Hospital</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>PPL Hospital</title>
 
-    <!-- core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/owl.carousel.css" rel="stylesheet">
-    <link href="css/owl.transitions.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+<!-- core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/animate.min.css" rel="stylesheet">
+<link href="css/owl.carousel.css" rel="stylesheet">
+<link href="css/owl.transitions.css" rel="stylesheet">
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<link rel="shortcut icon" href="images/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <!--/head-->
 
@@ -53,57 +53,77 @@ include "session.php";
             <ul class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="scroll active"><a href="#home">Home</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#searchModal">Search</a></li>
+
 					<?php
 
-					if ( ! isset( $_SESSION['login_user'] ) && ! isset( $_SESSION['login_hos'] ) ) {
-						?>
-                        <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
-                        <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
-                        </li>
+					//IF USER IS GUEST//
+					if ( ! isset( $_SESSION['login_user'] ) && ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
+					?>
+                    <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
+                    <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
 
-						<?php
+                    </li>
+
+					<?php
+					} else {
+					?>
+                    <!--RATING FOR PATIENTS, HOSPITALS, ADMIN-->
+                    <li class="scroll"><a href="#">Rating</a></li>
+                    <?php }
+                ?> <li class="scroll"><a href="search.php">Search</a></li>
+					<?php //IF USER IS ADMIN//
+					if ( isset( $_SESSION['login_admin'] ) ) {
+						?>
+                    <li class="scroll"><a href="view-hospital.php">Hospitals & Doctors</a></li>
+                    <li class=nav-item>
+                        <a href="logout.php">Sign out</a>
+                    </li>
+                    <li class="scroll"><a href="#"
+                                          style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                    </li>
+					<?php }
+					if ( session_status() == PHP_SESSION_ACTIVE ) {
+
+					//IF USER IS PATIENT//
+					if ( isset( $_SESSION['login_user'] ) ) {
+					if ( $_SESSION['login_user'] ) { ?>
+                    <li class="dropdown" role="presentation">
+                        <a id="dropdownMenu1" class="dropdown-toggle" href="#"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Your Account <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a class="dropdown-item" href="#" data-toggle="modal"
+                                   data-target="#changeModal">Change Password</a></li>
+                            <li><a class="dropdown-item"
+                                   href="<?php echo htmlspecialchars( "sendemail.php" ); ?>">Reset
+                                    Password</a></li>
+                        </ul>
+                    </li>
+                    <li class=nav-item>
+                        <a href="logout.php">Sign out</a>
+                    </li>
+                    <li class="scroll"><a href="#"
+                                          style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                    </li>
+					<?php }
 					}
 
-					?>
-                    <li class="scroll"><a href="#">Rating</a></li>
-                    <li class="scroll"><a href="list.html">Hospitals & Doctors</a></li>
+					//IF USER IS HOSPITAL//
+					if ( isset( $_SESSION['login_hos'] ) ) {
+					if ( $_SESSION['login_hos'] ) { ?>
+                    <li class="scroll"><a href="#">Your Hospital</a></li>
+                    <li class="scroll"><a href="logout.php">Sign out</a></li>
+                    <li class="scroll"><a href="#"
+                                          style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                    </li>
 					<?php
-					if ( session_status() == PHP_SESSION_ACTIVE ) {
-						if ( isset( $_SESSION['login_user'] ) ) {
-							if ( $_SESSION['login_user'] ) { ?>
-                                <li class="dropdown" role="presentation">
-                                    <a id="dropdownMenu1" class="dropdown-toggle" href="#"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        Your Account <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a class="dropdown-item" href="#" data-toggle="modal"
-                                               data-target="#changeModal">Change Password</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo htmlspecialchars( "sendemail.php" ); ?>">Reset Password</a></li>
-                                    </ul>
-                                </li>
-                                <li class=nav-item>
-                                    <a href="logout.php">Sign out</a>
-                                </li>
-                                <li class="scroll"><a href="#"
-                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
-                                </li>
-							<?php }
-						}
+					}
+					}
 
-						if ( isset( $_SESSION['login_hos'] ) ) {
-							if ( $_SESSION['login_hos'] ) { ?>
-                                <li class="scroll"><a href="#">Your Hospital</a></li>
-                                <li class="scroll"><a href="logout.php">Sign out</a></li>
-                                <li class="scroll"><a href="#"
-                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
-                                </li>
-								<?php
-							}
-						}
 					} ?>
                 </ul>
+            </ul>
         </div>
 
         <!-- Register Modal -->
@@ -344,57 +364,10 @@ include "session.php";
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                                        data-target="#resetModal">Forgot your password?</button>
+                                        data-target="#resetModal">Forgot your password?
+                                </button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Search Modal -->
-        <div id="searchModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <<!doctype html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport"
-                          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                    <title>Document</title>
-                </head>
-                <body>
-                
-                </body>
-                <!--Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Search</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="fluid-container">
-                            <h2>Search for a Doctor</h2>
-                            <form action="/action_page.php">
-                                <!--                                                Name-->
-                                <div class="form-group">
-                                    <label for="doctor__id">ID:</label>
-                                    <input type="text" class="form-control" id="doctor__id">
-                                    <label for="doctor__fname">First name:</label>
-                                    <input type="text" class="form-control" id="doctor__fname">
-                                    <label for="doctor__lname">Last name:</label>
-                                    <input type="text" class="form-control" id="doctor__lname">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
 

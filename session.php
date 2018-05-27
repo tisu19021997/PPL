@@ -32,11 +32,11 @@ if ( session_status() == PHP_SESSION_ACTIVE ) {
 
 		$user_check = $_SESSION['login_admin'];
 
-		$ses_sql = $conn->query( "SELECT id FROM `admin` WHERE id = '$user_check'" );
+//		$ses_sql = $conn->query( "SELECT id FROM `admin` WHERE id = '$user_check'" );
+//
+//		$row = mysqli_fetch_array( $ses_sql, MYSQLI_ASSOC );
 
-		$row = mysqli_fetch_array( $ses_sql, MYSQLI_ASSOC );
-
-		$login_session = $row['id'];
+		$login_session = 'admin';
 
 	}
 

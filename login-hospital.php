@@ -18,12 +18,15 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 }
 if ( isset( $_POST["login_hos"] ) ) {
 
-	$sql = "SELECT id, password FROM `hospital` WHERE id = '$hosid' AND password = '$hospwd' AND status='Active'";
+	$sql = "SELECT  password FROM `hospital` WHERE id = '$hosid'AND status='Active'";
 	$result = $conn->query( $sql );
+	$list = mysqli_fetch_assoc( $result );
+//	extract( $list );
+	$verify = password_verify( $hospwd, $list['password'] );
 
 }
 
-if ( $result->num_rows == 1 ) {
+if ($verify ) {
 
 	$_SESSION['login_hos'] = $hosid;
 	?>

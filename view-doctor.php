@@ -1,261 +1,234 @@
-<?php include_once 'database-config.php';
-include_once 'session.php';
-if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
+<?php include_once 'database-config.php'; ?>
+<?php include_once 'session.php';
+
+if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 	echo 'Shit happens'; ?>
     <html lang="en">
     <head>
-        <style>
-            @import url(https://fonts.googleapis.com/css?family=opensans:500);
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=opensans:500);
+        body{
+            background: #33cc99;
+            color:#fff;
+            font-family: 'Open Sans', sans-serif;
+            max-height:700px;
+            overflow: hidden;
+        }
+        .c{
+            text-align: center;
+            display: block;
+            position: relative;
+            width:80%;
+            margin:100px auto;
+        }
+        ._404{
+            font-size: 220px;
+            position: relative;
+            display: inline-block;
+            z-index: 2;
+            height: 250px;
+            letter-spacing: 15px;
+        }
+        ._1{
+            text-align:center;
+            display:block;
+            position:relative;
+            letter-spacing: 12px;
+            font-size: 4em;
+            line-height: 80%;
+        }
+        ._2{
+            text-align:center;
+            display:block;
+            position: relative;
+            font-size: 20px;
+        }
+        .text{
+            font-size: 70px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            margin: 19px 0px 0px 0px;
+            /* top: 256.301px; */
+            z-index: 3;
+            width: 100%;
+            line-height: 1.2em;
+            display: inline-block;
+        }
 
-            body {
-                background: #33cc99;
-                color: #fff;
-                font-family: 'Open Sans', sans-serif;
-                max-height: 700px;
-                overflow: hidden;
-            }
 
-            .c {
-                text-align: center;
-                display: block;
-                position: relative;
-                width: 80%;
-                margin: 100px auto;
-            }
+        .btn{
+            background-color: rgb( 255, 255, 255 );
+            position: relative;
+            display: inline-block;
+            width: 358px;
+            padding: 5px;
+            z-index: 5;
+            font-size: 25px;
+            margin:0 auto;
+            color:#33cc99;
+            text-decoration: none;
+            margin-right: 10px
+        }
+        .right{
+            float:right;
+            width:60%;
+        }
 
-            ._404 {
-                font-size: 220px;
-                position: relative;
-                display: inline-block;
-                z-index: 2;
-                height: 250px;
-                letter-spacing: 15px;
-            }
+        hr{
+            padding: 0;
+            border: none;
+            border-top: 5px solid #fff;
+            color: #fff;
+            text-align: center;
+            margin: 0px auto;
+            width: 420px;
+            height:10px;
+            z-index: -10;
+        }
 
-            ._1 {
-                text-align: center;
-                display: block;
-                position: relative;
-                letter-spacing: 12px;
-                font-size: 4em;
-                line-height: 80%;
-            }
+        hr:after {
+            content: "\2022";
+            display: inline-block;
+            position: relative;
+            top: -0.75em;
+            font-size: 2em;
+            padding: 0 0.2em;
+            background: #33cc99;
+        }
 
-            ._2 {
-                text-align: center;
-                display: block;
-                position: relative;
-                font-size: 20px;
-            }
+        .cloud {
+            width: 350px; height: 120px;
 
-            .text {
-                font-size: 70px;
-                text-align: center;
-                position: relative;
-                display: inline-block;
-                margin: 19px 0px 0px 0px;
-                /* top: 256.301px; */
-                z-index: 3;
-                width: 100%;
-                line-height: 1.2em;
-                display: inline-block;
-            }
+            background: #FFF;
+            background: linear-gradient(top, #FFF 100%);
+            background: -webkit-linear-gradient(top, #FFF 100%);
+            background: -moz-linear-gradient(top, #FFF 100%);
+            background: -ms-linear-gradient(top, #FFF 100%);
+            background: -o-linear-gradient(top, #FFF 100%);
 
-            .btn {
-                background-color: rgb(255, 255, 255);
-                position: relative;
-                display: inline-block;
-                width: 358px;
-                padding: 5px;
-                z-index: 5;
-                font-size: 25px;
-                margin: 0 auto;
-                color: #33cc99;
-                text-decoration: none;
-                margin-right: 10px
-            }
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
 
-            .right {
-                float: right;
-                width: 60%;
-            }
+            position: absolute;
+            margin: 120px auto 20px;
+            z-index:-1;
+            transition: ease 1s;
+        }
 
-            hr {
-                padding: 0;
-                border: none;
-                border-top: 5px solid #fff;
-                color: #fff;
-                text-align: center;
-                margin: 0px auto;
-                width: 420px;
-                height: 10px;
-                z-index: -10;
-            }
+        .cloud:after, .cloud:before {
+            content: '';
+            position: absolute;
+            background: #FFF;
+            z-index: -1
+        }
 
-            hr:after {
-                content: "\2022";
-                display: inline-block;
-                position: relative;
-                top: -0.75em;
-                font-size: 2em;
-                padding: 0 0.2em;
-                background: #33cc99;
-            }
+        .cloud:after {
+            width: 100px; height: 100px;
+            top: -50px; left: 50px;
 
-            .cloud {
-                width: 350px;
-                height: 120px;
+            border-radius: 100px;
+            -webkit-border-radius: 100px;
+            -moz-border-radius: 100px;
+        }
 
-                background: #FFF;
-                background: linear-gradient(top, #FFF 100%);
-                background: -webkit-linear-gradient(top, #FFF 100%);
-                background: -moz-linear-gradient(top, #FFF 100%);
-                background: -ms-linear-gradient(top, #FFF 100%);
-                background: -o-linear-gradient(top, #FFF 100%);
+        .cloud:before {
+            width: 180px; height: 180px;
+            top: -90px; right: 50px;
 
-                border-radius: 100px;
-                -webkit-border-radius: 100px;
-                -moz-border-radius: 100px;
+            border-radius: 200px;
+            -webkit-border-radius: 200px;
+            -moz-border-radius: 200px;
+        }
 
-                position: absolute;
-                margin: 120px auto 20px;
-                z-index: -1;
-                transition: ease 1s;
-            }
+        .x1 {
+            top:-50px;
+            left:100px;
+            -webkit-transform: scale(0.3);
+            -moz-transform: scale(0.3);
+            transform: scale(0.3);
+            opacity: 0.9;
+            -webkit-animation: moveclouds 15s linear infinite;
+            -moz-animation: moveclouds 15s linear infinite;
+            -o-animation: moveclouds 15s linear infinite;
+        }
 
-            .cloud:after, .cloud:before {
-                content: '';
-                position: absolute;
-                background: #FFF;
-                z-index: -1
-            }
+        .x1_5{
+            top:-80px;
+            left:250px;
+            -webkit-transform: scale(0.3);
+            -moz-transform: scale(0.3);
+            transform: scale(0.3);
+            -webkit-animation: moveclouds 17s linear infinite;
+            -moz-animation: moveclouds 17s linear infinite;
+            -o-animation: moveclouds 17s linear infinite;
+        }
 
-            .cloud:after {
-                width: 100px;
-                height: 100px;
-                top: -50px;
-                left: 50px;
+        .x2 {
+            left: 250px;
+            top:30px;
+            -webkit-transform: scale(0.6);
+            -moz-transform: scale(0.6);
+            transform: scale(0.6);
+            opacity: 0.6;
+            -webkit-animation: moveclouds 25s linear infinite;
+            -moz-animation: moveclouds 25s linear infinite;
+            -o-animation: moveclouds 25s linear infinite;
+        }
 
-                border-radius: 100px;
-                -webkit-border-radius: 100px;
-                -moz-border-radius: 100px;
-            }
+        .x3 {
+            left: 250px; bottom: -70px;
 
-            .cloud:before {
-                width: 180px;
-                height: 180px;
-                top: -90px;
-                right: 50px;
+            -webkit-transform: scale(0.6);
+            -moz-transform: scale(0.6);
+            transform: scale(0.6);
+            opacity: 0.8;
 
-                border-radius: 200px;
-                -webkit-border-radius: 200px;
-                -moz-border-radius: 200px;
-            }
+            -webkit-animation: moveclouds 25s linear infinite;
+            -moz-animation: moveclouds 25s linear infinite;
+            -o-animation: moveclouds 25s linear infinite;
+        }
 
-            .x1 {
-                top: -50px;
-                left: 100px;
-                -webkit-transform: scale(0.3);
-                -moz-transform: scale(0.3);
-                transform: scale(0.3);
-                opacity: 0.9;
-                -webkit-animation: moveclouds 15s linear infinite;
-                -moz-animation: moveclouds 15s linear infinite;
-                -o-animation: moveclouds 15s linear infinite;
-            }
+        .x4 {
+            left: 470px; botttom: 20px;
 
-            .x1_5 {
-                top: -80px;
-                left: 250px;
-                -webkit-transform: scale(0.3);
-                -moz-transform: scale(0.3);
-                transform: scale(0.3);
-                -webkit-animation: moveclouds 17s linear infinite;
-                -moz-animation: moveclouds 17s linear infinite;
-                -o-animation: moveclouds 17s linear infinite;
-            }
+            -webkit-transform: scale(0.75);
+            -moz-transform: scale(0.75);
+            transform: scale(0.75);
+            opacity: 0.75;
 
-            .x2 {
-                left: 250px;
-                top: 30px;
-                -webkit-transform: scale(0.6);
-                -moz-transform: scale(0.6);
-                transform: scale(0.6);
-                opacity: 0.6;
-                -webkit-animation: moveclouds 25s linear infinite;
-                -moz-animation: moveclouds 25s linear infinite;
-                -o-animation: moveclouds 25s linear infinite;
-            }
+            -webkit-animation: moveclouds 18s linear infinite;
+            -moz-animation: moveclouds 18s linear infinite;
+            -o-animation: moveclouds 18s linear infinite;
+        }
 
-            .x3 {
-                left: 250px;
-                bottom: -70px;
+        .x5 {
+            left: 200px; top: 300px;
 
-                -webkit-transform: scale(0.6);
-                -moz-transform: scale(0.6);
-                transform: scale(0.6);
-                opacity: 0.8;
+            -webkit-transform: scale(0.5);
+            -moz-transform: scale(0.5);
+            transform: scale(0.5);
+            opacity: 0.8;
 
-                -webkit-animation: moveclouds 25s linear infinite;
-                -moz-animation: moveclouds 25s linear infinite;
-                -o-animation: moveclouds 25s linear infinite;
-            }
+            -webkit-animation: moveclouds 20s linear infinite;
+            -moz-animation: moveclouds 20s linear infinite;
+            -o-animation: moveclouds 20s linear infinite;
+        }
 
-            .x4 {
-                left: 470px;
-                botttom: 20px;
-
-                -webkit-transform: scale(0.75);
-                -moz-transform: scale(0.75);
-                transform: scale(0.75);
-                opacity: 0.75;
-
-                -webkit-animation: moveclouds 18s linear infinite;
-                -moz-animation: moveclouds 18s linear infinite;
-                -o-animation: moveclouds 18s linear infinite;
-            }
-
-            .x5 {
-                left: 200px;
-                top: 300px;
-
-                -webkit-transform: scale(0.5);
-                -moz-transform: scale(0.5);
-                transform: scale(0.5);
-                opacity: 0.8;
-
-                -webkit-animation: moveclouds 20s linear infinite;
-                -moz-animation: moveclouds 20s linear infinite;
-                -o-animation: moveclouds 20s linear infinite;
-            }
-
-            @-webkit-keyframes moveclouds {
-                0% {
-                    margin-left: 1000px;
-                }
-                100% {
-                    margin-left: -1000px;
-                }
-            }
-
-            @-moz-keyframes moveclouds {
-                0% {
-                    margin-left: 1000px;
-                }
-                100% {
-                    margin-left: -1000px;
-                }
-            }
-
-            @-o-keyframes moveclouds {
-                0% {
-                    margin-left: 1000px;
-                }
-                100% {
-                    margin-left: -1000px;
-                }
-            }
-        </style>
+        @-webkit-keyframes moveclouds {
+            0% {margin-left: 1000px;}
+            100% {margin-left: -1000px;}
+        }
+        @-moz-keyframes moveclouds {
+            0% {margin-left: 1000px;}
+            100% {margin-left: -1000px;}
+        }
+        @-o-keyframes moveclouds {
+            0% {margin-left: 1000px;}
+            100% {margin-left: -1000px;}
+        }
+    </style>
 
     </head>
     <body>
@@ -313,7 +286,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.js"></script>
         <!--    //Modify record-->
-        <script src="js/modify_record_hospital.js"></script>
+        <script src="js/modify_record_doctor.js"></script>
         <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -433,38 +406,41 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                                     <i class="fa fa-user-md"></i> <span>Patient</span>
                                     <span class="pull-right-container">
 
-                                    </span>
+                    </span>
                             </li>
                             <li class="treeview ">
                                 <a href="view-hospital.php">
                                     <i class="fa fa-user-md"></i> <span>Hospital</span>
                                     <span class="pull-right-container">
 
-                                    </span>
+                    </span>
+
                             </li>
+
                             <li class="treeview ">
-                                <a href="view-doctor.php">
-                                    <i class="fa fa-user-md"></i> <span>Doctors </span>
+                                <a href="#">
+                                    <i class="fa fa-user-md"></i> <span>Doctor</span>
                                     <span class="pull-right-container">
 
-                                    </span>
+                    </span>
                                 </a>
                             </li>
-
                             <li class="treeview ">
                                 <a href="view-specific.php">
                                     <i class="fa fa-sitemap"></i> <span>Specialty category</span>
                                     <span class="pull-right-container">
 
-                                    </span>
+                    </span>
                                 </a>
                             </li>
+
 
                             <li class="treeview ">
                                 <a href="#">
                                     <i class="fa fa-sitemap"></i> <span>Rating and comment</span>
                                     <span class="pull-right-container">
-                                    </span>
+
+                    </span>
                                 </a>
                             </li>
 
@@ -489,31 +465,60 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                                 <tr>
                                     <th></th>
                                     <th>ID</th>
-                                    <th>Password</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Hospital Admin Name</th>
-                                    <th>Hospital Admin Email</th>
-                                    <th>Status</th>
+                                    <th>Last Name</th>
+                                    <th>First Name</th>
+                                    <th>Gender</th>
+                                    <th>Degree</th>
+                                    <th>Accepted Insurance</th>
+                                    <th>Specific Specialty</th>
+                                    <th>Office hours</th>
+                                    <th>Language</th>
+                                    <th>Work at</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-								<?php include_once 'view-hospital-app.php'; ?>
+								<?php include_once 'view-doctor-app.php'; ?>
                                 <tr id="new_row">
                                     <div class="form-row">
                                         <div class="form-group">
                                             <td></td>
                                             <td><input required type="text" id="new_id"></td>
-                                            <td><input required type="text" id="new_name"></td>
-                                            <td><input required type="text" id="new_password"></td>
-                                            <td><input required type="text" id="new_address"></td>
-                                            <td><input required type="text" id="new_hosadmin"></td>
-                                            <td><input required type="email" id="new_hosadminemail"></td>
-                                            <td id="new_status">Active</td>
+                                            <td><input required type="text" id="new_lname"></td>
+                                            <td><input required type="text" id="new_fname"></td>
+                                            <td><input required type="text" id="new_gender"></td>
+                                            <td><input required type="text" id="new_degree"></td>
+                                            <td><input required type="text" id="new_ins"></td>
+                                            <td>
+                                                <select name="new_specific" id="new_specific">
+													<?php
+													$sql_test       = 'SELECT DISTINCT name FROM `specialty`';
+													$resultset_test = $conn->query( $sql_test );
+													while ( $test = mysqli_fetch_assoc( $resultset_test ) ) {
+														?>
+                                                        <option value="<?php echo $test['name'] ?>"><?php echo $test['name'] ?></option>
+														<?php
+													} ?>
+                                                </select>
+                                            </td>
+                                            <td><input required type="text" id="new_office"></td>
+                                            <td><input required type="text" id="new_lang"></td>
+                                            <td>
+                                                <select name="new_hos" id="new_hos">
+													<?php
+													$sql_hos       = 'SELECT DISTINCT name FROM `hospital`';
+													$resultset_hos = $conn->query( $sql_hos );
+													while ( $hos = mysqli_fetch_assoc( $resultset_hos ) ) {
+														?>
+                                                        <option value="<?php echo $hos['name'] ?>"><?php echo $hos['name'] ?></option>
+														<?php
+													} ?>
+                                                </select>
+                                            </td>
+
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn btn-success" onclick="insert_row_hos();">
-                                                        <i class="fa fa-plus"></i> Add Hospital </a>
+                                                    <a class="btn btn-success" onclick="insert_row_doc();">
+                                                        <i class="fa fa-plus"></i> Add Doctor </a>
                                                 </div>
                                             </td>
                                             <!--<input type="button" value="Insert Row" onclick="insert_row();"></td>-->
@@ -528,5 +533,4 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                 </div>
     </body>
     </html>
-
 <?php }

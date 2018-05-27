@@ -1,6 +1,6 @@
-<?php include_once 'database-config.php';
-include_once 'session.php';
-if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
+<?php include_once 'database-config.php'; ?>
+<?php include_once 'session.php';
+if (  ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 	echo 'Shit happens'; ?>
     <html lang="en">
     <head>
@@ -252,7 +252,12 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 
 
 	<?php
-} else { ?>
+} else {
+
+$sql       = 'SELECT DISTINCT gen_specialty FROM `specialty`';
+$resultset = $conn->query( $sql );
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -284,7 +289,8 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.js"></script>
-    <script src="js/modify_record.js"></script>
+    <!--    //Modify record-->
+    <script src="js/modify_record_spe.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -308,14 +314,14 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
             float: left;
         }
 
+        li {
+            list-style-type: none;
+        }
+
         .links li {
             float: left;
             margin: 0 3px 0 0;
             position: relative;
-
-        }
-        li {
-            list-style-type: none;
         }
 
         .links a {
@@ -380,7 +386,7 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 
                     <li class="scroll"><a href="index.php"
                                           style="color:#43b8e6;">Home</a></li>
-                    <li class="scroll"><a href="logout.php"
+                    <li class="scroll"><a href="logout.php" data-toggle="modal" data-target="#signInModal"
                                           style="color:#43b8e6;">Sign out</a></li>
 
                 </ul>
@@ -400,19 +406,20 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
                 <div class="sidebar" style="height: auto;">
                     <ul class="sidebar-menu">
                         <li class="treeview ">
-                            <a href="#">
+                            <a href="view-patient.php">
                                 <i class="fa fa-user-md"></i> <span>Patient</span>
                                 <span class="pull-right-container">
-                        
+
                     </span>
                         </li>
+
                         <li class="treeview ">
                             <a href="view-hospital.php">
                                 <i class="fa fa-user-md"></i> <span>Hospital</span>
                                 <span class="pull-right-container">
-                        
-                    </span>
 
+                                    </span>
+                        </li>
                         <li class="treeview ">
                             <a href="view-doctor.php">
                                 <i class="fa fa-user-md"></i> <span>Doctors </span>
@@ -430,16 +437,14 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
                                     </span>
                             </a>
                         </li>
-
                         <li class="treeview ">
-                            <a href="#">
-                                <i class="fa fa-sitemap"></i> <span>Rating and comment</span>
+                            <a href="view-specific.php">
+                                <i class="fa fa-sitemap"></i> <span>Rating and Comment</span>
                                 <span class="pull-right-container">
-                        
-                    </span>
+
+                                    </span>
                             </a>
                         </li>
-
 
                     </ul>
                 </div>
@@ -450,7 +455,7 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
         <div class="col-sm-12">
             <div class="panel panel-default thumbnail">
                 <div class="panel-heading no-print">
-                    <h3>Patients</h3>
+                    <h3>General and Specific Specialties:</h3>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -458,40 +463,45 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
                                id="user_table">
                             <thead class="thead-dark">
                             <tr>
-                                <th></th>
+                                <th>
+                                    <button title="Delete Multiple" type="button" class="btn btn btn-danger"
+                                            id="delete_multi">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </th>
                                 <th>ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Gender</th>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>Address</th>
-                                <th>Language</th>
-                                <th>Status</th>
+                                <th>Specific Specialty</th>
+                                <th>General Specialty</th>
                             </tr>
                             </thead>
                             <tbody>
-							<?php include_once 'view-app.php'; ?>
+							<?php include_once 'view-specific-app.php'; ?>
                             <tr id="new_row">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <td></td>
+                                        <td>
+                                        </td>
                                         <td><input required type="text" id="new_id"></td>
-                                        <td><input required type="text" id="new_fname"></td>
-                                        <td><input required type="text" id="new_lname"></td>
-                                        <td><input required type="text" id="new_gender"></td>
-                                        <td><input required type="text" id="new_email"></td>
-                                        <td><input required type="text" id="new_password"></td>
-                                        <td><input required type="text" id="new_address"></td>
-                                        <td><input required type="text" id="new_lang"></td>
-                                        <td>Active</td>
+                                        <td><input required type="text" id="new_name"></td>
+                                        <td>
+                                            <select name="new_gen" id="new_gen">
+	                                            <?php
+	                                            $sql_test = 'SELECT DISTINCT gen_specialty FROM `specialty`';
+	                                            $resultset_test = $conn->query( $sql_test );
+	                                            while ( $test = mysqli_fetch_assoc( $resultset_test ) ) {
+		                                            ?>
+                                                    <option value="<?php echo $test['gen_specialty']?>"><?php echo $test['gen_specialty'] ?></option>
+		                                            <?php
+	                                            } ?>
+                                            </select>
+                                        </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-success" onclick="insert_row();">
-                                                    <i class="fa fa-plus"></i> Add Patient </a>
+                                                <a class="btn btn-success" onclick="insert_row_gen();">
+                                                    <i class="fa fa-plus"></i> Add Specialty </a>
                                             </div>
                                         </td>
-                                            <!--<input type="button" value="Insert Row" onclick="insert_row();"></td>-->
+                                        <!--<input type="button" value="Insert Row" onclick="insert_row();"></td>-->
                                     </div>
                                 </div>
                             </tr>
@@ -499,9 +509,10 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
                         </table>
                     </div>
                 </div>
-
             </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
-
-<?php }
+<?php } ?>

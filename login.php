@@ -17,15 +17,27 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 }
 if ( isset( $_POST["patient_login"] ) ) {
-	$sql_stmt  = "SELECT  password FROM patient WHERE id='$myid' ";
+	$sql_stmt  = "SELECT  password FROM patient WHERE id='$myid' AND status='Active' ";
 	$resultset = $conn->query( $sql_stmt );
-	$list = mysqli_fetch_assoc( $resultset );
+	$list      = mysqli_fetch_assoc( $resultset );
 //	extract( $list );
-    $verify = password_verify( $mypwd, $list['password'] );
-	if ( $verify ) {
-//		$sql    = "SELECT id, password, status FROM `patient` WHERE id = '$myid' AND password = '$mypwd' AND status='Active'";
-//		$result = $conn->query( $sql );
-//		echo $sql;
+	$verify  = password_verify( $mypwd, $list['password'] );
+	$isadmin = false;
+	if ( $myid === 'admin' && $mypwd === 'admin' ) {
+		$isadmin = true;
+	}
+	if ( $isadmin ) {
+		$_SESSION['login_admin'] = 'admin';
+		?>
+        <h1>Logged in as admin</h1>
+        <h4>Redirected in 5 seconds</h4>
+		<?php
+		header( "refresh:5 url=index.php" );
+	}
+	elseif ( $verify ) {
+		//        $sql    = "SELECT id, password, status FROM `patient` WHERE id = '$myid' AND password = '$mypwd' AND status='Active'";
+		//        $result = $conn->query( $sql );
+		//        echo $sql;
 		$_SESSION['login_user'] = $myid;
 		?>
         <h1>Logged in!</h1>
