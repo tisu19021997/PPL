@@ -261,3 +261,47 @@ function insert_row() {
 }
 
 
+//Muliple Delete
+$(document).ready(function(){
+
+    $('#delete_multi_pa').click(function(){
+
+        var post_arr = [];
+        $('#user_table input[type=checkbox]').each(function() {
+            if (jQuery(this).is(":checked")) {
+                var id = this.id;
+                console.log(id);
+                var splitid = id.split('_');
+                console.log(splitid);
+                var postid = splitid[1];
+                console.log(postid);
+                post_arr.push(postid);
+
+            }
+        });
+
+        if(post_arr.length > 0){
+
+            // AJAX Request
+            $.ajax({
+                url: 'modify_records.php',
+                type: 'POST',
+                data: {
+                    delete_multi_pa: 'delete_multi_pa',
+                    post_id: post_arr
+                },
+                success: function(response){
+                    $.each(post_arr, function( i,l ){
+                        $('tr#row'+ l).css('background','#e5604b').fadeOut(800,function(){
+                            $(this).remove();
+                        })
+                    });
+                    // $('tr#row' + id).css('background', '#e5604b');
+                    // $('tr#row' + id).fadeOut(800, function () {
+                    //     $(this).remove();
+                }
+            });
+        }
+    });
+
+});

@@ -72,6 +72,16 @@ if ( isset( $_POST['deactive_row'] ) ) {
 	exit();
 }
 
+if ( isset( $_POST['delete_multi_pa'] ) ) {
+	$post_ids = $_POST['post_id'];
+
+	foreach ( $post_ids as $id ) {
+		// Delete record
+		$query = "DELETE FROM patient WHERE id=" . $id;
+		mysqli_query( $conn, $query );
+	}
+
+}
 /**
  * HOSPITAL
  */
@@ -192,13 +202,13 @@ if ( isset( $_POST['edit_row_doc'] ) ) {
 	$fname  = $_POST['fname_val'];
 	$lname  = $_POST['lname_val'];
 	$gender = $_POST['gender_val'];
-	$degree  = $_POST['degree_val'];
+	$degree = $_POST['degree_val'];
 //	$password = $_POST['password_val'];
-	$speci_spe = $_POST['specific_spe_val'];
-	$accept_ins = $_POST['accept_ins_val'];
+	$speci_spe    = $_POST['specific_spe_val'];
+	$accept_ins   = $_POST['accept_ins_val'];
 	$office_hours = $_POST['office_hours_val'];
-	$lang    = $_POST['lang_val'];
-	$hosname = $_POST['hosname_val'];
+	$lang         = $_POST['lang_val'];
+	$hosname      = $_POST['hosname_val'];
 	//$edit_sql = "update patient set id='$id', fname='$fname',lname='$lname', gender='$gender',email='$email',password='$password',address='$address', lang='$lang' where id='$row'";
 	$edit_sql = "update doctor set id='$id', fname='$fname',lname='$lname', gender='$gender',degree='$degree',accepted_ins='$accept_ins',specific_specialty='$speci_spe',office_hours ='$office_hours', lang='$lang',hosname='$hosname' where id='$row'";
 	echo $edit_sql;
@@ -222,15 +232,35 @@ if ( isset( $_POST['insert_row_doc'] ) ) {
 	$fname  = $_POST['fname_val'];
 	$lname  = $_POST['lname_val'];
 	$gender = $_POST['gender_val'];
-	$degree  = $_POST['degree_val'];
+	$degree = $_POST['degree_val'];
 //	$password = $_POST['password_val'];
-	$speci_spe = $_POST['specific_spe_val'];
-	$accept_ins = $_POST['accept_ins_val'];
+	$speci_spe    = $_POST['specific_spe_val'];
+	$accept_ins   = $_POST['accept_ins_val'];
 	$office_hours = $_POST['office_hours_val'];
-	$lang    = $_POST['lang_val'];
-	$hosname = $_POST['hosname_val'];
+	$lang         = $_POST['lang_val'];
+	$hosname      = $_POST['hosname_val'];
 
 	mysqli_query( $conn, "insert into doctor values('$id','$fname','$lname','$gender','$degree','$accept_ins','$speci_spe','$office_hours','$lang', '$hosname')" );
 	echo mysqli_insert_id( $conn );
+	exit();
+}
+
+/**
+ * COMMENTS
+ */
+if ( isset( $_POST['active_row_comment'] ) ) {
+	$row_no     = $_POST['row_id'];
+	$status     = $_POST['status_val'];
+	$active_sql = "UPDATE comment SET status='Active' WHERE id='$row_no'";
+	mysqli_query( $conn, $active_sql );
+	exit();
+}
+
+if ( isset( $_POST['deactive_row_comment'] ) ) {
+	$row_no       = $_POST['row_id'];
+	$status       = $_POST['status_val'];
+	$deactive_sql = "UPDATE comment SET status='Deactive' WHERE id='$row_no'";
+	mysqli_query( $conn, $deactive_sql );
+
 	exit();
 }

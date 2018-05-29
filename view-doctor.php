@@ -436,7 +436,7 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 
 
                             <li class="treeview ">
-                                <a href="#">
+                                <a href="view-comment.php">
                                     <i class="fa fa-sitemap"></i> <span>Rating and comment</span>
                                     <span class="pull-right-container">
 
@@ -454,7 +454,7 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
             <div class="col-sm-12">
                 <div class="panel panel-default thumbnail">
                     <div class="panel-heading no-print">
-                        <h3>Hospitals</h3>
+                        <h3>Doctors</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

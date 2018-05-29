@@ -6,24 +6,21 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
     <head>
         <style>
             @import url(https://fonts.googleapis.com/css?family=opensans:500);
-
-            body {
-                background: #33cc99;
-                color: #fff;
+            body{
+                background: #7cd2ff;
+                color:#fff;
                 font-family: 'Open Sans', sans-serif;
-                max-height: 700px;
+                max-height:700px;
                 overflow: hidden;
             }
-
-            .c {
+            .c{
                 text-align: center;
                 display: block;
                 position: relative;
-                width: 80%;
-                margin: 100px auto;
+                width:80%;
+                margin:100px auto;
             }
-
-            ._404 {
+            ._404{
                 font-size: 220px;
                 position: relative;
                 display: inline-block;
@@ -31,24 +28,21 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                 height: 250px;
                 letter-spacing: 15px;
             }
-
-            ._1 {
-                text-align: center;
-                display: block;
-                position: relative;
+            ._1{
+                text-align:center;
+                display:block;
+                position:relative;
                 letter-spacing: 12px;
                 font-size: 4em;
                 line-height: 80%;
             }
-
-            ._2 {
-                text-align: center;
-                display: block;
+            ._2{
+                text-align:center;
+                display:block;
                 position: relative;
                 font-size: 20px;
             }
-
-            .text {
+            .text{
                 font-size: 70px;
                 text-align: center;
                 position: relative;
@@ -61,26 +55,26 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                 display: inline-block;
             }
 
-            .btn {
-                background-color: rgb(255, 255, 255);
+
+            .btn{
+                background-color: rgb( 255, 255, 255 );
                 position: relative;
                 display: inline-block;
                 width: 358px;
                 padding: 5px;
                 z-index: 5;
                 font-size: 25px;
-                margin: 0 auto;
-                color: #33cc99;
+                margin:0 auto;
+                color:#7cd2ff;
                 text-decoration: none;
                 margin-right: 10px
             }
-
-            .right {
-                float: right;
-                width: 60%;
+            .right{
+                float:right;
+                width:60%;
             }
 
-            hr {
+            hr{
                 padding: 0;
                 border: none;
                 border-top: 5px solid #fff;
@@ -88,7 +82,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                 text-align: center;
                 margin: 0px auto;
                 width: 420px;
-                height: 10px;
+                height:10px;
                 z-index: -10;
             }
 
@@ -99,12 +93,11 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                 top: -0.75em;
                 font-size: 2em;
                 padding: 0 0.2em;
-                background: #33cc99;
+                background: #7cd2ff;
             }
 
             .cloud {
-                width: 350px;
-                height: 120px;
+                width: 350px; height: 120px;
 
                 background: #FFF;
                 background: linear-gradient(top, #FFF 100%);
@@ -119,7 +112,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
 
                 position: absolute;
                 margin: 120px auto 20px;
-                z-index: -1;
+                z-index:-1;
                 transition: ease 1s;
             }
 
@@ -131,10 +124,8 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             .cloud:after {
-                width: 100px;
-                height: 100px;
-                top: -50px;
-                left: 50px;
+                width: 100px; height: 100px;
+                top: -50px; left: 50px;
 
                 border-radius: 100px;
                 -webkit-border-radius: 100px;
@@ -142,10 +133,8 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             .cloud:before {
-                width: 180px;
-                height: 180px;
-                top: -90px;
-                right: 50px;
+                width: 180px; height: 180px;
+                top: -90px; right: 50px;
 
                 border-radius: 200px;
                 -webkit-border-radius: 200px;
@@ -153,8 +142,8 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             .x1 {
-                top: -50px;
-                left: 100px;
+                top:-50px;
+                left:100px;
                 -webkit-transform: scale(0.3);
                 -moz-transform: scale(0.3);
                 transform: scale(0.3);
@@ -164,9 +153,9 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                 -o-animation: moveclouds 15s linear infinite;
             }
 
-            .x1_5 {
-                top: -80px;
-                left: 250px;
+            .x1_5{
+                top:-80px;
+                left:250px;
                 -webkit-transform: scale(0.3);
                 -moz-transform: scale(0.3);
                 transform: scale(0.3);
@@ -177,7 +166,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
 
             .x2 {
                 left: 250px;
-                top: 30px;
+                top:30px;
                 -webkit-transform: scale(0.6);
                 -moz-transform: scale(0.6);
                 transform: scale(0.6);
@@ -188,8 +177,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             .x3 {
-                left: 250px;
-                bottom: -70px;
+                left: 250px; bottom: -70px;
 
                 -webkit-transform: scale(0.6);
                 -moz-transform: scale(0.6);
@@ -202,8 +190,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             .x4 {
-                left: 470px;
-                botttom: 20px;
+                left: 470px; botttom: 20px;
 
                 -webkit-transform: scale(0.75);
                 -moz-transform: scale(0.75);
@@ -216,8 +203,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             .x5 {
-                left: 200px;
-                top: 300px;
+                left: 200px; top: 300px;
 
                 -webkit-transform: scale(0.5);
                 -moz-transform: scale(0.5);
@@ -230,30 +216,16 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
             }
 
             @-webkit-keyframes moveclouds {
-                0% {
-                    margin-left: 1000px;
-                }
-                100% {
-                    margin-left: -1000px;
-                }
+                0% {margin-left: 1000px;}
+                100% {margin-left: -1000px;}
             }
-
             @-moz-keyframes moveclouds {
-                0% {
-                    margin-left: 1000px;
-                }
-                100% {
-                    margin-left: -1000px;
-                }
+                0% {margin-left: 1000px;}
+                100% {margin-left: -1000px;}
             }
-
             @-o-keyframes moveclouds {
-                0% {
-                    margin-left: 1000px;
-                }
-                100% {
-                    margin-left: -1000px;
-                }
+                0% {margin-left: 1000px;}
+                100% {margin-left: -1000px;}
             }
         </style>
 
@@ -461,7 +433,7 @@ if ( ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) 
                             </li>
 
                             <li class="treeview ">
-                                <a href="#">
+                                <a href="view-comment.php">
                                     <i class="fa fa-sitemap"></i> <span>Rating and comment</span>
                                     <span class="pull-right-container">
                                     </span>

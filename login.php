@@ -29,10 +29,9 @@ if ( isset( $_POST["patient_login"] ) ) {
 	if ( $isadmin ) {
 		$_SESSION['login_admin'] = 'admin';
 		?>
-        <h1>Logged in as admin</h1>
-        <h4>Redirected in 5 seconds</h4>
+
 		<?php
-		header( "refresh:5 url=index.php" );
+		header( "location: success-login.php" );
 	}
 	elseif ( $verify ) {
 		//        $sql    = "SELECT id, password, status FROM `patient` WHERE id = '$myid' AND password = '$mypwd' AND status='Active'";
@@ -40,16 +39,14 @@ if ( isset( $_POST["patient_login"] ) ) {
 		//        echo $sql;
 		$_SESSION['login_user'] = $myid;
 		?>
-        <h1>Logged in!</h1>
-        <h4>You will be redirected in 5 seconds</h4>
 		<?php
-		header( "refresh:5 url=index.php" );
+		header( "location: success-login.php" );
 
 	} else {
-		echo "<h1>ID or password is invalid</h1>";
-		echo "<h4>You will be redirected in 5 seconds</h4>";
-		user_error( "Query failed " . $conn->error . "<br>" );
-		header( "refresh:5 url=index.php" );
+//		echo "<h1>ID or password is invalid</h1>";
+//		echo "<h4>You will be redirected in 5 seconds</h4>";
+//		user_error( "Query failed " . $conn->error . "<br>" );
+		header( "location: fail.php" );
 	}
 }
 

@@ -30,15 +30,13 @@ if ($verify ) {
 
 	$_SESSION['login_hos'] = $hosid;
 	?>
-	<h1>Logged in!</h1>
-	<h4>You will be redirected in 5 seconds</h4>
 
 	<?php
-	header( "refresh:5 url=index.php" );
+	header( "Location: success-login.php" );
 
 } else {
-	echo "<h1>ID or password is invalid</h1>";
-	echo "<h4>You will be redirected in 5 seconds</h4>";
-	user_error( "Query failed " . $conn->error . "<br>" );
-	header( "refresh:5 url=index.php" );
+//	echo "<h1>ID or password is invalid</h1>";
+//	echo "<h4>You will be redirected in 5 seconds</h4>";
+//	user_error( "Query failed " . $conn->error . "<br>" );
+	header( "Location:  fail.php" );
 }

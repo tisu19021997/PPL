@@ -131,7 +131,7 @@ function active_row_hos(id) {
         success: function (response) {
             $('#row' + id).css({"background-color": "#5cb85c", "color": "white"});
             $("#status_val" + id).html("Active");
-            $("#active_button" + id).attr("onclick", "deactive_row('" + id + "')");
+            $("#active_button" + id).attr("onclick", "deactive_row_hos('" + id + "')");
             $("#active_button" + id).attr("id", "deactive_button" + id);
             $("#deactive_button" + id + " .fa-check").addClass("fa-ban").removeClass("fa-check");
         }
@@ -160,7 +160,7 @@ function deactive_row_hos(id) {
         success: function (response) {
             $('#row' + id).css({"background-color": "#ef7070", "color": "white"});
             $("#status_val" + id).html("Deactive");
-            $("#deactive_button" + id).attr("onclick", "active_row('" + id + "')");
+            $("#deactive_button" + id).attr("onclick", "active_row_hos('" + id + "')");
             $("#deactive_button" + id).attr("id", "active_button" + id);
             $("#active_button" + id + " .fa-ban").addClass("fa-check").removeClass("fa-ban");
         }

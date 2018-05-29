@@ -20,11 +20,11 @@ if ( session_status() == PHP_SESSION_ACTIVE ) {
 
 		$user_check = $_SESSION['login_hos'];
 
-		$ses_sql = $conn->query( "SELECT id FROM `hospital` WHERE id = '$user_check'" );
+		$ses_sql = $conn->query( "SELECT name FROM `hospital` WHERE id = '$user_check'" );
 
 		$row = mysqli_fetch_array( $ses_sql, MYSQLI_ASSOC );
 
-		$login_session = $row['id'];
+		$login_session = $row['name'];
 
 	}
 

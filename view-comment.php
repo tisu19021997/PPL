@@ -286,7 +286,7 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/jquery.js"></script>
 		<!--    //Modify record-->
-		<script src="js/modify_record_doctor.js"></script>
+		<script src="js/modify_record_comment.js"></script>
 		<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>
@@ -454,7 +454,7 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
 			<div class="col-sm-12">
 				<div class="panel panel-default thumbnail">
 					<div class="panel-heading no-print">
-						<h3>Hospitals</h3>
+						<h3>Comments and Ratings</h3>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
