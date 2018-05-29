@@ -8,30 +8,30 @@ include "session.php";
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>PPL Hospital</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>PPL Hospital</title>
 
-<!-- core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/font-awesome.min.css" rel="stylesheet">
-<link href="css/animate.min.css" rel="stylesheet">
-<link href="css/owl.carousel.css" rel="stylesheet">
-<link href="css/owl.transitions.css" rel="stylesheet">
-<link href="css/prettyPhoto.css" rel="stylesheet">
-<link href="css/main.css" rel="stylesheet">
-<link href="css/responsive.css" rel="stylesheet">
-<!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
-<![endif]-->
-<link rel="shortcut icon" href="images/ico/favicon.ico">
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <!-- core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.transitions.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <!--/head-->
 
@@ -58,68 +58,78 @@ include "session.php";
 
 					//IF USER IS GUEST//
 					if ( ! isset( $_SESSION['login_user'] ) && ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
-					?>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
+						?>
+                        <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
+                        <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
 
-                    </li>
+                        </li>
 
-					<?php
+						<?php
 					} else {
+						?>
+                        <!--                    <!--RATING FOR PATIENTS, HOSPITALS, ADMIN-->
+                        <!--                    <li class="scroll"><a href="#">Rating</a></li>-->
+					<?php }
 					?>
-                    <!--RATING FOR PATIENTS, HOSPITALS, ADMIN-->
-                    <li class="scroll"><a href="#">Rating</a></li>
-                    <?php }
-                ?> <li class="scroll"><a href="search.php">Search</a></li>
+                    <li class="scroll"><a href="search.php">Search</a></li>
 					<?php //IF USER IS ADMIN//
 					if ( isset( $_SESSION['login_admin'] ) ) {
 						?>
-                    <li class="scroll"><a href="view-hospital.php">Hospitals & Doctors</a></li>
-                    <li class=nav-item>
-                        <a href="logout.php">Sign out</a>
-                    </li>
-                    <li class="scroll"><a href="#"
-                                          style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
-                    </li>
+                        <li class="scroll"><a href="view-hospital.php">Hospitals & Doctors</a></li>
+                        <li class=nav-item>
+                            <a href="logout.php">Sign out</a>
+                        </li>
+                        <li class="scroll"><a href="#"
+                                              style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                        </li>
 					<?php }
 					if ( session_status() == PHP_SESSION_ACTIVE ) {
 
-					//IF USER IS PATIENT//
-					if ( isset( $_SESSION['login_user'] ) ) {
-					if ( $_SESSION['login_user'] ) { ?>
-                    <li class="dropdown" role="presentation">
-                        <a id="dropdownMenu1" class="dropdown-toggle" href="#"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Your Account <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a class="dropdown-item" href="#" data-toggle="modal"
-                                   data-target="#changeModal">Change Password</a></li>
-                            <li><a class="dropdown-item"
-                                   href="<?php echo htmlspecialchars( "sendemail.php" ); ?>">Reset
-                                    Password</a></li>
-                        </ul>
-                    </li>
-                    <li class=nav-item>
-                        <a href="logout.php">Sign out</a>
-                    </li>
-                    <li class="scroll"><a href="#"
-                                          style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
-                    </li>
-					<?php }
-					}
+						//IF USER IS PATIENT//
+						if ( isset( $_SESSION['login_user'] ) ) {
+							if ( $_SESSION['login_user'] ) { ?>
+                                <li class="dropdown" role="presentation">
+                                    <a id="dropdownMenu1" class="dropdown-toggle" href="#"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Your Account <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a class="dropdown-item" href="#" data-toggle="modal"
+                                               data-target="#changeModal">Change Password</a></li>
+                                    </ul>
+                                </li>
+                                <li class=nav-item>
+                                    <a href="logout.php">Sign out</a>
+                                </li>
+                                <li class="scroll"><a href="#"
+                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                                </li>
+							<?php }
+						}
 
-					//IF USER IS HOSPITAL//
-					if ( isset( $_SESSION['login_hos'] ) ) {
-					if ( $_SESSION['login_hos'] ) { ?>
-                    <li class="scroll"><a href="#">Your Hospital</a></li>
-                    <li class="scroll"><a href="logout.php">Sign out</a></li>
-                    <li class="scroll"><a href="#"
-                                          style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
-                    </li>
-					<?php
-					}
-					}
+						//IF USER IS HOSPITAL//
+						if ( isset( $_SESSION['login_hos'] ) ) {
+							if ( $_SESSION['login_hos'] ) { ?>
+                                <!--                    <li class="scroll"><a href="#">Your Hospital</a></li>-->
+
+                                <li class="dropdown" role="presentation">
+                                    <a id="dropdownMenu2" class="dropdown-toggle" href="#"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Your Hospital <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li><a class="dropdown-item" href="#" data-toggle="modal"
+                                               data-target="#changeModal">Change Password</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="scroll"><a href="logout.php">Sign out</a></li>
+                                <li class="scroll"><a href="#"
+                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                                </li>
+								<?php
+							}
+						}
 
 					} ?>
                 </ul>
@@ -452,7 +462,15 @@ include "session.php";
                                     <input name="youremail" type="email" class="form-control" id="youremail">
                                 </div>
 
-                                <button name="reset_password" type="submit" class="btn btn-primary">Confirm
+                                <div class="form-group">
+                                    <label for="objectu">Patient</label>
+                                    <input type="checkbox" name="object" id="objectu" value="Patient">
+                                    <label for="objecth">Hospital</label>
+                                    <input type="checkbox" name="object" id="objecth" value="Hospital">
+                                </div>
+
+                                <button action="<?php echo htmlspecialchars( "sendMail/smtp.php" ); ?>"
+                                        name="reset_password" type="submit" class="btn btn-primary">Confirm
                                 </button>
                             </form>
                         </div>
@@ -592,10 +610,7 @@ include "session.php";
 
         <div class="text-center">
             <ul class="portfolio-filter">
-                <li><a class="active" href="#" data-filter="*">All Works</a></li>
-                <li><a href="#" data-filter=".creative">Creative</a></li>
-                <li><a href="#" data-filter=".corporate">Corporate</a></li>
-                <li><a href="#" data-filter=".portfolio">Portfolio</a></li>
+                <li><a class="active" href="#" data-filter="*">Our services</a></li>
             </ul>
             <!--/#portfolio-filter-->
         </div>
@@ -603,7 +618,7 @@ include "session.php";
         <div class="portfolio-items">
             <div class="portfolio-item creative">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/01.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl6.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 1</h3>
                         Lorem Ipsum Dolor Sit
@@ -615,7 +630,7 @@ include "session.php";
 
             <div class="portfolio-item corporate portfolio">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/02.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 2</h3>
                         Lorem Ipsum Dolor Sit
@@ -627,7 +642,7 @@ include "session.php";
 
             <div class="portfolio-item creative">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/03.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl2.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 3</h3>
                         Lorem Ipsum Dolor Sit
@@ -639,7 +654,7 @@ include "session.php";
 
             <div class="portfolio-item corporate">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/04.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl3.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 4</h3>
                         Lorem Ipsum Dolor Sit
@@ -651,7 +666,7 @@ include "session.php";
 
             <div class="portfolio-item creative portfolio">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/05.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl4.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 5</h3>
                         Lorem Ipsum Dolor Sit
@@ -663,7 +678,7 @@ include "session.php";
 
             <div class="portfolio-item corporate">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/06.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 5</h3>
                         Lorem Ipsum Dolor Sit
@@ -675,7 +690,7 @@ include "session.php";
 
             <div class="portfolio-item creative portfolio">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/07.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl5.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 7</h3>
                         Lorem Ipsum Dolor Sit
@@ -687,7 +702,7 @@ include "session.php";
 
             <div class="portfolio-item corporate">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/08.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl3dsa.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 8</h3>
                         Lorem Ipsum Dolor Sit
@@ -787,7 +802,7 @@ include "session.php";
                         <span>3</span>
                         <i class="fa fa-image fa-2x"></i>
                     </div>
-                    <h3>DESIGN</h3>
+                    <h3>TESTING</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-4 col-xs-6">
@@ -796,7 +811,7 @@ include "session.php";
                         <span>4</span>
                         <i class="fa fa-heart fa-2x"></i>
                     </div>
-                    <h3>DEVELOP</h3>
+                    <h3>ADVICES</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-4 col-xs-6">
@@ -805,7 +820,7 @@ include "session.php";
                         <span>5</span>
                         <i class="fa fa-shopping-cart fa-2x"></i>
                     </div>
-                    <h3>TESTING</h3>
+                    <h3>MEDICINE</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-4 col-xs-6">
@@ -814,7 +829,7 @@ include "session.php";
                         <span>6</span>
                         <i class="fa fa-space-shuttle fa-2x"></i>
                     </div>
-                    <h3>LAUNCH</h3>
+                    <h3>CURE</h3>
                 </div>
             </div>
         </div>
@@ -915,44 +930,6 @@ include "session.php";
     </div>
 </section>
 <!--/#meet-team-->
-
-<section id="animated-number">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">Fun Facts</h2>
-            <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-        </div>
-
-        <div class="row text-center">
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
-                    <div class="animated-number" data-digit="2305" data-duration="1000"></div>
-                    <strong>CUPS OF COFFEE CONSUMED</strong>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
-                    <div class="animated-number" data-digit="1231" data-duration="1000"></div>
-                    <strong>CLIENT WORKED WITH</strong>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
-                    <div class="animated-number" data-digit="3025" data-duration="1000"></div>
-                    <strong>PROJECT COMPLETED</strong>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">
-                    <div class="animated-number" data-digit="1199" data-duration="1000"></div>
-                    <strong>QUESTIONS ANSWERED</strong>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--/#animated-number-->
 
 
 <section id="get-in-touch">

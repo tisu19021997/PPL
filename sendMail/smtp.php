@@ -5,6 +5,7 @@
     <title>PHPMailer - SMTP test</title>
 </head>
 <body>
+<div style="display:none;">
 <?php
 
 //SMTP needs accurate times, and the PHP time zone MUST be set
@@ -12,6 +13,8 @@
 date_default_timezone_set('Etc/UTC');
 
 require 'PHPMailerAutoload.php';
+
+//include '../reset.php';
 
 //Create a new PHPMailer instance
 $mail = new PHPMailer();
@@ -48,7 +51,7 @@ $mail->addAddress("quangphamm1811@gmail.com", "To Name");
 $mail->Subject = "Recover your password";
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+$mail->msgHTML(file_get_contents('sendMail/contents.html'), dirname(__FILE__));
 //Replace the plain text body with one created manually
 //$mail->AltBody = "This is a plain-text message body";
 //Attach an image file
@@ -61,5 +64,6 @@ if (!$mail->send()) {
     echo "Message sent!";
 }
 ?>
+</div>
 </body>
 </html>
