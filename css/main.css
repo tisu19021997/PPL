@@ -9,12 +9,45 @@ Author URL: http://shapebootstrap.net
 /*************************
 **********Custom**********
  */
+@-o-keyframes fadeIt {
+  0%   { background-color: #FFFFFF; }
+  50%  { background-color: #81dc83; }
+  100% { background-color: #FFFFFF; }
+}
+@keyframes fadeIt {
+  0%   { background-color: #FFFFFF; }
+  50%  { background-color: #81dc83; }
+  100% { background-color: #FFFFFF; }
+}
+
+.backgroundAnimated{
+  background-image:none !important;
+  -o-animation: fadeIt 5s ease-in-out;
+  animation: fadeIt 5s ease-in-out;
+}
+
+table tr {
+  opacity: 1;
+  -webkit-transition: opacity 1000ms linear;
+  transition: opacity 1000ms linear;
+}
+
 .error {
   color: #ff685b;
   display: block;
   font-family: helvetica;
   font-style: italic;
   letter-spacing: 1px;
+}
+.panel.panel-default.thumbnail {
+  margin-right: 1em;
+}
+.btn-xs {
+  font-size:10px;
+}
+.table-fit td {
+  white-space: nowrap;
+  width:1%;
 }
 /*************************
 *******Typography******

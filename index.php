@@ -1,6 +1,9 @@
 <?php
 //include_once "server.php";
-//?>
+include "database-config.php";
+include "session.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,156 +50,240 @@
                 <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="logo"></a>
             </div>
 
-            <div class="collapse navbar-collapse navbar-right">
+            <ul class="collapse navbar-collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li class="scroll active"><a href="#home">Home</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#searchModal">Search</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
-                    <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a></li>
-                    <li class="scroll hide"><a href="#">Your Account</a></li>
-                    <li class="scroll"><a href="#">Rating</a></li>
-                    <li class="scroll"><a href="list.html">Hospitals & Doctors</a></li>
+
+					<?php
+
+					//IF USER IS GUEST//
+					if ( ! isset( $_SESSION['login_user'] ) && ! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
+						?>
+                        <li class="scroll"><a href="" data-toggle="modal" data-target="#registerModal">Register</a></li>
+                        <li class="scroll"><a href="" data-toggle="modal" data-target="#signInModal">Sign in</a>
+
+                        </li>
+
+						<?php
+					} else {
+						?>
+                        <!--                    <!--RATING FOR PATIENTS, HOSPITALS, ADMIN-->
+                        <!--                    <li class="scroll"><a href="#">Rating</a></li>-->
+					<?php }
+					?>
+                    <li class="scroll"><a href="search.php">Search</a></li>
+					<?php //IF USER IS ADMIN//
+					if ( isset( $_SESSION['login_admin'] ) ) {
+						?>
+                        <li class="scroll"><a href="view-hospital.php">Hospitals & Doctors</a></li>
+                        <li class=nav-item>
+                            <a href="logout.php">Sign out</a>
+                        </li>
+                        <li class="scroll"><a href="#"
+                                              style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                        </li>
+					<?php }
+					if ( session_status() == PHP_SESSION_ACTIVE ) {
+
+						//IF USER IS PATIENT//
+						if ( isset( $_SESSION['login_user'] ) ) {
+							if ( $_SESSION['login_user'] ) { ?>
+                                <li class="dropdown" role="presentation">
+                                    <a id="dropdownMenu1" class="dropdown-toggle" href="#"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Your Account <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a class="dropdown-item" href="#" data-toggle="modal"
+                                               data-target="#changeModal">Change Password</a></li>
+                                    </ul>
+                                </li>
+                                <li class=nav-item>
+                                    <a href="logout.php">Sign out</a>
+                                </li>
+                                <li class="scroll"><a href="#"
+                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                                </li>
+							<?php }
+						}
+
+						//IF USER IS HOSPITAL//
+						if ( isset( $_SESSION['login_hos'] ) ) {
+							if ( $_SESSION['login_hos'] ) { ?>
+                                <!--                    <li class="scroll"><a href="#">Your Hospital</a></li>-->
+
+                                <li class="dropdown" role="presentation">
+                                    <a id="dropdownMenu2" class="dropdown-toggle" href="#"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Your Hospital <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li><a class="dropdown-item" href="#" data-toggle="modal"
+                                               data-target="#changeModal">Change Password</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="scroll"><a href="logout.php">Sign out</a></li>
+                                <li class="scroll"><a href="#"
+                                                      style="color: #ff3100;">Hello, <?php echo $login_session ?></a>
+                                </li>
+								<?php
+							}
+						}
+
+					} ?>
                 </ul>
-            </div>
+            </ul>
+        </div>
 
-            <!-- Register Modal -->
-            <div id="registerModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+        <!-- Register Modal -->
+        <div id="registerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Registration</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="fluid-container">
-                                <h2>Register a Patient/Hospital</h2>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Registration</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fluid-container">
+                            <h2>Register a Patient/Hospital</h2>
 
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#patient">Patient</a></li>
-                                    <li><a data-toggle="tab" href="#hospital">Hospital</a></li>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#patient">Patient</a></li>
+                                <li><a data-toggle="tab" href="#hospital">Hospital</a></li>
 
-                                </ul>
+                            </ul>
 
-                                <div class="tab-content">
-                                    <div id="patient" class="tab-pane fade in active">
-                                        <h3>Register a patient</h3>
-                                        <form id="regist-form" action="<?php echo htmlspecialchars("register.php");?>" method="post">
+                            <div class="tab-content">
+                                <div id="patient" class="tab-pane fade in active">
+                                    <h3>Register a patient</h3>
+                                    <form id="regist-form"
+                                          action="<?php echo htmlspecialchars( "register.php" ); ?>" method="post">
 
-                                            <input type='hidden' name='submitted' id='submitted' value='1'/>
-
-                                            <!--                                                Name-->
-                                            <div class="form-group">
-                                                <label for="fname">Your first name:</label>
-                                                <input name="fname" type="text" class="form-control" id="fname">
-                                                <label for="lname">Your last name:</label>
-                                                <input name="lname" type="text" class="form-control" id="lname">
-                                            </div>
-
-                                            <!--                                                ID-->
-                                            <div class="form-group">
-                                                <label for="patient__id">Your ID:</label>
-                                                <input name="id" type="text" class="form-control" id="id">
-                                                <!--                                                Email-->
-                                                <div class="form-group">
-                                                    <label for="email">Your email:</label>
-                                                    <input name="patient_email" type="email" class="form-control" id="email">
-                                                </div>
-
-                                                <!--                                                Password-->
-                                                <div class="form-group">
-                                                    <label for="passwd">Password:</label>
-                                                    <input name="password" type="password" class="form-control" id="passwd">
-                                                </div>
-
-                                                <!--                                                Address-->
-                                                <div class="form-group">
-                                                    <label for="patient__add">Address:</label>
-                                                    <input name="address" type="text" class="form-control" id="patient_add">
-                                                </div>
-
-                                                <!--                                                Gender-->
-                                                <div class="radio">
-                                                    <label><input type="radio" name="optradio" value=""
-                                                                  checked="checked" value="Male">Male </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label><input type="radio" name="optradio" value="Female">Female </label>
-                                                </div>
-                                                <div class="radio">
-                                                    <label><input type="radio" name="optradio" value="Others">Others </label>
-                                                </div>
-
-                                                <!--                                                Languages-->
-                                                <div class="form-group">
-                                                    <label for="input__language">Language</label>
-                                                    <select name="lang" id="input__language" class="form-control">
-                                                        <option selected value="vietnamese">Vietnamese</option>
-                                                        <option value="english">English</option>
-                                                    </select>
-                                                </div>
-
-                                                <button name="register" type="submit" class="btn btn-primary">Register</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!--                                        Hospital-->
-                                <div id="hospital" class="tab-pane fade">
-                                    <h3>Register a hospital</h3>
-                                    <form id="regist-form-hospital" action="/action_page.php">
+                                        <input type='hidden' name='submitted' id='submitted' value='1'/>
 
                                         <!--                                                Name-->
-
                                         <div class="form-group">
-                                            <label for="hospital__name">Hospital Name:</label>
-                                            <input name="hosname" type="text" class="form-control"
-                                                   id="hospital__name">
+                                            <label for="fname">Your first name:</label>
+                                            <input name="fname" type="text" class="form-control" id="fname">
+                                            <label for="lname">Your last name:</label>
+                                            <input name="lname" type="text" class="form-control" id="lname">
                                         </div>
 
                                         <!--                                                ID-->
                                         <div class="form-group">
-                                            <label for="hospital__id">Hospital ID:</label>
-                                            <input name="hosid" type="text" class="form-control" id="hospital__id">
-                                        </div>
+                                            <label for="patient__id">Your ID:</label>
+                                            <input name="id" type="text" class="form-control" id="id">
+                                            <!--                                                Email-->
+                                            <div class="form-group">
+                                                <label for="email">Your email:</label>
+                                                <input name="patient_email" type="email" class="form-control"
+                                                       id="email">
+                                            </div>
 
-                                        <!--                                                Password-->
-                                        <div class="form-group">
-                                            <label for="hospital__pwd">Hospital Password:</label>
-                                            <input name="hospwd" type="password" class="form-control" id="hospital__pwd">
-                                        </div>
+                                            <!--                                                Password-->
+                                            <div class="form-group">
+                                                <label for="passwd">Password:</label>
+                                                <input name="password" type="password" class="form-control"
+                                                       id="passwd">
+                                            </div>
 
-                                        <!--                                                Address-->
-                                        <div class="form-group">
-                                            <label for="hospital__add">Address:</label>
-                                            <input name="hosadd" type="text" class="form-control"
-                                                   id="hospital__add">
-                                        </div>
+                                            <!--                                                Address-->
+                                            <div class="form-group">
+                                                <label for="patient__add">Address:</label>
+                                                <input name="address" type="text" class="form-control"
+                                                       id="patient_add">
+                                            </div>
 
-                                        <!--Hospital Admin Name-->
-                                        <div class="form-group">
-                                            <label for="hospital__admin--name">Hospital Admin Name:</label>
-                                            <input name="hosadmin" type="text" class="form-control"
-                                                   id="hospital__admin--name">
-                                        </div>
+                                            <!--                                                Gender-->
+                                            <div class="radio">
+                                                <label><input type="radio" name="optradio"
+                                                              checked="checked" value="Male">Male </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label><input type="radio" name="optradio" value="Female">Female
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label><input type="radio" name="optradio" value="Others">Others
+                                                </label>
+                                            </div>
 
-                                        <!--Hospital Admin Email-->
-                                        <div class="form-group">
-                                            <label for="hospital__admin--email">Hospital Admin Email:</label>
-                                            <input name="hosemail" type="email" class="form-control"
-                                                   id="hospital__admin--email">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                            <!--                                                Languages-->
+                                            <div class="form-group">
+                                                <label for="input__language">Language</label>
+                                                <select name="lang" id="input__language" class="form-control">
+                                                    <option selected value="vietnamese">Vietnamese</option>
+                                                    <option value="english">English</option>
+                                                </select>
+                                            </div>
+
+                                            <button name="register" type="submit" class="btn btn-primary">Register
+                                            </button>
                                     </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
+                            </div>
+                            <!--                                        Hospital-->
+                            <div id="hospital" class="tab-pane fade">
+                                <h3>Register a hospital</h3>
+                                <form id="regist-form-hospital"
+                                      action="<?php echo htmlspecialchars( "register-hospital.php" ); ?>"
+                                      method="post">
+
+                                    <!--                                                Name-->
+
+                                    <div class="form-group">
+                                        <label for="hospital__name">Hospital Name:</label>
+                                        <input name="hosname" type="text" class="form-control"
+                                               id="hospital__name">
+                                    </div>
+
+                                    <!--                                                ID-->
+                                    <div class="form-group">
+                                        <label for="hospital__id">Hospital ID:</label>
+                                        <input name="hosid" type="text" class="form-control" id="hospital__id">
+                                    </div>
+
+                                    <!--                                                Password-->
+                                    <div class="form-group">
+                                        <label for="hospital__pwd">Hospital Password:</label>
+                                        <input name="hospwd" type="password" class="form-control"
+                                               id="hospital__pwd">
+                                    </div>
+
+                                    <!--                                                Address-->
+                                    <div class="form-group">
+                                        <label for="hospital__add">Address:</label>
+                                        <input name="hosadd" type="text" class="form-control"
+                                               id="hospital__add">
+                                    </div>
+
+                                    <!--Hospital Admin Name-->
+                                    <div class="form-group">
+                                        <label for="hospital__admin--name">Hospital Admin Name:</label>
+                                        <input name="hosadmin" type="text" class="form-control"
+                                               id="hospital__admin--name">
+                                    </div>
+
+                                    <!--Hospital Admin Email-->
+                                    <div class="form-group">
+                                        <label for="hospital__admin--email">Hospital Admin Email:</label>
+                                        <input name="hosemail" type="email" class="form-control"
+                                               id="hospital__admin--email">
+                                    </div>
+                                    <button name="hosregister" type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- Sign in Modal -->
@@ -222,60 +309,73 @@
                             <div class="tab-content">
                                 <div id="patient__signin" class="tab-pane fade in active">
                                     <h3>Sign in as a patient</h3>
-                                    <form action="/action_page.php">
+                                    <form id="patient__signin" action="<?php echo htmlspecialchars( "login.php" ); ?>"
+                                          method="post">
 
                                         <!--                                                ID-->
                                         <div class="form-group">
                                             <label for="patientid">Your ID:</label>
-                                            <input type="text" class="form-control" id="patientid">
+                                            <input name="myid" type="text" class="form-control" id="patientid">
                                         </div>
 
                                         <!--                                                Password-->
                                         <div class="form-group">
                                             <label for="pwd">Password:</label>
-                                            <input type="password" class="form-control" id="pwd">
+                                            <input name="mypwd" type="password" class="form-control" id="pwd">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                        <button name="patient_login" type="submit" class="btn btn-primary">Sign in
+                                        </button>
                                     </form>
                                 </div>
 
                                 <!--                                        Hospital-->
                                 <div id="hospital__signin" class="tab-pane fade">
                                     <h3>Sign in as a hospital</h3>
-                                    <form action="/action_page.php">
+                                    <form id="hospital__signin"
+                                          action="<?php echo htmlspecialchars( "login-hospital.php" ); ?>"
+                                          method="POST">
+
 
                                         <!--                                                Name-->
 
-                                        <div class="form-group">
-                                            <label for="hospitalname">Hospital Name:</label>
-                                            <input type="text" class="form-control" id="hospitalname">
-                                        </div>
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label for="hospitalname">Hospital Name:</label>-->
+                                        <!--                                            <input type="text" class="form-control" id="hospitalname">-->
+                                        <!--                                        </div>-->
 
                                         <!--                                                ID-->
                                         <div class="form-group">
                                             <label for="hospitalid">Hospital ID:</label>
-                                            <input type="text" class="form-control" id="hospitalid">
+                                            <input name="hospital-id" type="text" class="form-control" id="hospitalid">
                                         </div>
 
-                                        <!--Hospital Admin Name-->
+                                        <!--                                    Password-->
                                         <div class="form-group">
-                                            <label for="hospitaladmin--name">Hospital Admin Name:</label>
-                                            <input type="email" class="form-control" id="hospitaladmin--name">
+                                            <label for="hospitalpwd">Hospital Password:</label>
+                                            <input name="hospital-pwd" type="password" class="form-control"
+                                                   id="hospitalpwd">
                                         </div>
 
-                                        <!--Hospital Admin Email-->
-                                        <div class="form-group">
-                                            <label for="hospitaladmin--email">Hospital Admin Email:</label>
-                                            <input type="email" class="form-control" id="hospitaladmin--email">
-                                        </div>
+                                        <!--                                        Hospital Admin Name-->
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label for="hospitaladmin--name">Hospital Admin Name:</label>-->
+                                        <!--                                            <input type="email" class="form-control" id="hospitaladmin--name">-->
+                                        <!--                                        </div>-->
+                                        <!--                                        Hospital Admin Email-->
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label for="hospitaladmin--email">Hospital Admin Email:</label>-->
+                                        <!--                                            <input type="email" class="form-control" id="hospitaladmin--email">-->
+                                        <!--                                        </div>-->
 
-                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                        <button name="login_hos" type="submit" class="btn btn-primary">Sign in</button>
                                     </form>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-warning ">Forgot your password?</button>
+                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                        data-target="#resetModal">Forgot your password?
+                                </button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                             </div>
@@ -287,43 +387,102 @@
             </div>
         </div>
 
-        <!-- Search Modal -->
-        <div id="searchModal" class="modal fade" role="dialog">
+        <!-- Change Password Modal -->
+        <div id="changeModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Search</h4>
+                        <h4 class="modal-title">Change your password</h4>
                     </div>
                     <div class="modal-body">
                         <div class="fluid-container">
-                            <h2>Search for a Doctor</h2>
-                            <form action="/action_page.php">
-                                <!--                                                Name-->
+
+                            <form id="patient__change" action="<?php echo htmlspecialchars( "change.php" ); ?>"
+                                  method="post">
+
+                                <!--Old Password-->
                                 <div class="form-group">
-                                    <label for="doctor__id">ID:</label>
-                                    <input type="text" class="form-control" id="doctor__id">
-                                    <label for="doctor__fname">First name:</label>
-                                    <input type="text" class="form-control" id="doctor__fname">
-                                    <label for="doctor__lname">Last name:</label>
-                                    <input type="text" class="form-control" id="doctor__lname">
+                                    <label for="oldpassword">Your old password:</label>
+                                    <input name="oldpwd" type="password" class="form-control" id="oldpassword">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
+
+                                <!-- New Password-->
+                                <div class="form-group">
+                                    <label for="newpwd">New password:</label>
+                                    <input name="newpwd" type="password" class="form-control" id="newpwd">
+                                </div>
+
+                                <!-- Confirm New Password-->
+                                <div class="form-group">
+                                    <label for="conpwd">Confirm password:</label>
+                                    <input name="conpwd" type="password" class="form-control" id="conpwd">
+                                </div>
+
+                                <button name="change_password" type="submit" class="btn btn-primary">Confirm
+                                </button>
                             </form>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
                         </div>
 
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-
             </div>
         </div>
 
+        <!--Reset Password Modal-->
+        <div id="resetModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Reset your password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="fluid-container">
+
+                            <form id="patient__reset" action="<?php echo htmlspecialchars( "reset.php" ); ?>"
+                                  method="post">
+
+                                <!--ID-->
+                                <div class="form-group">
+                                    <label for="yourid">Your ID:</label>
+                                    <input name="yourid" type="text" class="form-control" id="yourid">
+                                </div>
+
+                                <!--Email -->
+                                <div class="form-group">
+                                    <label for="youremail">Your email:</label>
+                                    <input name="youremail" type="email" class="form-control" id="youremail">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="objectu">Patient</label>
+                                    <input type="checkbox" name="object" id="objectu" value="Patient">
+                                    <label for="objecth">Hospital</label>
+                                    <input type="checkbox" name="object" id="objecth" value="Hospital">
+                                </div>
+
+                                <button action="<?php echo htmlspecialchars( "sendMail/smtp.php" ); ?>"
+                                        name="reset_password" type="submit" class="btn btn-primary">Confirm
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <!--/.container-->
     </nav>
     <!--/nav-->
@@ -382,7 +541,7 @@
 
         <div class="row">
             <div class="features">
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-line-chart"></i>
@@ -395,7 +554,7 @@
                 </div>
                 <!--/.col-md-4-->
 
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="100ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-cubes"></i>
@@ -408,7 +567,7 @@
                 </div>
                 <!--/.col-md-4-->
 
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-pie-chart"></i>
@@ -421,7 +580,7 @@
                 </div>
                 <!--/.col-md-4-->
 
-                <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
+                <div class="col-md-3 col-sm-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="300ms">
                     <div class="media service-box">
                         <div class="pull-left">
                             <i class="fa fa-bar-chart"></i>
@@ -445,16 +604,12 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title text-center wow fadeInDown">Our Works</h2>
-            <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+            <p class="text-center wow fadeInDown">You can trust on us <br> Yeah trust on us.</p>
         </div>
 
         <div class="text-center">
             <ul class="portfolio-filter">
-                <li><a class="active" href="#" data-filter="*">All Works</a></li>
-                <li><a href="#" data-filter=".creative">Creative</a></li>
-                <li><a href="#" data-filter=".corporate">Corporate</a></li>
-                <li><a href="#" data-filter=".portfolio">Portfolio</a></li>
+                <li><a class="active" href="#" data-filter="*">Our services</a></li>
             </ul>
             <!--/#portfolio-filter-->
         </div>
@@ -462,7 +617,7 @@
         <div class="portfolio-items">
             <div class="portfolio-item creative">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/01.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl6.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 1</h3>
                         Lorem Ipsum Dolor Sit
@@ -474,7 +629,7 @@
 
             <div class="portfolio-item corporate portfolio">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/02.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 2</h3>
                         Lorem Ipsum Dolor Sit
@@ -486,7 +641,7 @@
 
             <div class="portfolio-item creative">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/03.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl2.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 3</h3>
                         Lorem Ipsum Dolor Sit
@@ -498,7 +653,7 @@
 
             <div class="portfolio-item corporate">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/04.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl3.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 4</h3>
                         Lorem Ipsum Dolor Sit
@@ -510,7 +665,7 @@
 
             <div class="portfolio-item creative portfolio">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/05.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl4.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 5</h3>
                         Lorem Ipsum Dolor Sit
@@ -522,7 +677,7 @@
 
             <div class="portfolio-item corporate">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/06.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 5</h3>
                         Lorem Ipsum Dolor Sit
@@ -534,7 +689,7 @@
 
             <div class="portfolio-item creative portfolio">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/07.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl5.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 7</h3>
                         Lorem Ipsum Dolor Sit
@@ -546,7 +701,7 @@
 
             <div class="portfolio-item corporate">
                 <div class="portfolio-item-inner">
-                    <img class="img-responsive" src="images/portfolio/08.jpg" alt="">
+                    <img class="img-responsive" src="images/portfolio/ppl3dsa.jpg" alt="">
                     <div class="portfolio-info">
                         <h3>Portfolio Item 8</h3>
                         Lorem Ipsum Dolor Sit
@@ -646,7 +801,7 @@
                         <span>3</span>
                         <i class="fa fa-image fa-2x"></i>
                     </div>
-                    <h3>DESIGN</h3>
+                    <h3>TESTING</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-4 col-xs-6">
@@ -655,7 +810,7 @@
                         <span>4</span>
                         <i class="fa fa-heart fa-2x"></i>
                     </div>
-                    <h3>DEVELOP</h3>
+                    <h3>ADVICES</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-4 col-xs-6">
@@ -664,7 +819,7 @@
                         <span>5</span>
                         <i class="fa fa-shopping-cart fa-2x"></i>
                     </div>
-                    <h3>TESTING</h3>
+                    <h3>MEDICINE</h3>
                 </div>
             </div>
             <div class="col-md-2 col-md-4 col-xs-6">
@@ -673,7 +828,7 @@
                         <span>6</span>
                         <i class="fa fa-space-shuttle fa-2x"></i>
                     </div>
-                    <h3>LAUNCH</h3>
+                    <h3>CURE</h3>
                 </div>
             </div>
         </div>
@@ -681,137 +836,7 @@
 </section>
 <!--/#work-process-->
 
-<section id="meet-team">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">Meet The Team</h2>
-            <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
-                    <div class="team-img">
-                        <img class="img-responsive" src="images/team/01.jpg" alt="">
-                    </div>
-                    <div class="team-info">
-                        <h3>Bin Burhan</h3>
-                        <span>Co-Founder</span>
-                    </div>
-                    <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters
-                        greater</p>
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
-                    <div class="team-img">
-                        <img class="img-responsive" src="images/team/02.jpg" alt="">
-                    </div>
-                    <div class="team-info">
-                        <h3>Jane Man</h3>
-                        <span>Project Manager</span>
-                    </div>
-                    <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters
-                        greater</p>
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
-                    <div class="team-img">
-                        <img class="img-responsive" src="images/team/03.jpg" alt="">
-                    </div>
-                    <div class="team-info">
-                        <h3>Pahlwan</h3>
-                        <span>Designer</span>
-                    </div>
-                    <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters
-                        greater</p>
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="team-member wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">
-                    <div class="team-img">
-                        <img class="img-responsive" src="images/team/04.jpg" alt="">
-                    </div>
-                    <div class="team-info">
-                        <h3>Nasir uddin</h3>
-                        <span>UI/UX</span>
-                    </div>
-                    <p>Backed by some of the biggest names in the industry, Firefox OS is an open platform that fosters
-                        greater</p>
-                    <ul class="social-icons">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-
-    </div>
-</section>
-<!--/#meet-team-->
-
-<section id="animated-number">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title text-center wow fadeInDown">Fun Facts</h2>
-            <p class="text-center wow fadeInDown">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-        </div>
-
-        <div class="row text-center">
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="0ms">
-                    <div class="animated-number" data-digit="2305" data-duration="1000"></div>
-                    <strong>CUPS OF COFFEE CONSUMED</strong>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="100ms">
-                    <div class="animated-number" data-digit="1231" data-duration="1000"></div>
-                    <strong>CLIENT WORKED WITH</strong>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="200ms">
-                    <div class="animated-number" data-digit="3025" data-duration="1000"></div>
-                    <strong>PROJECT COMPLETED</strong>
-                </div>
-            </div>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">
-                    <div class="animated-number" data-digit="1199" data-duration="1000"></div>
-                    <strong>QUESTIONS ANSWERED</strong>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--/#animated-number-->
 
 
 <section id="get-in-touch">
@@ -836,9 +861,9 @@
                         <h3>Contact Info</h3>
 
                         <address>
-                            <strong>Twitter, Inc.</strong><br>
-                            795 Folsom Ave, Suite 600<br>
-                            San Francisco, CA 94107<br>
+                            <strong>PPL, Inc.</strong><br>
+                            18/20 NDK, <br>
+                            HCMC, Vietnam<br>
                             <abbr title="Phone">P:</abbr> (123) 456-7890
                         </address>
 
@@ -870,8 +895,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                &copy; 2014 Your Company. Designed by <a target="_blank" href="http://shapebootstrap.net/"
-                                                         title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>
+ 
             </div>
             <div class="col-sm-6">
                 <ul class="social-icons">
