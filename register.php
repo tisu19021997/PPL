@@ -8,7 +8,9 @@
 //Default database config
 include_once "database-config.php";
 
-
+/**
+ * PATIENT REGISTRATION
+ */
 //Method check and get form data
 if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
@@ -24,6 +26,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 	//Patient password
 	$pwd = test_input( $_POST["password"] );
+	//Password hash
+	$hashed_password = password_hash($pwd,PASSWORD_DEFAULT);
 
 	//Patient address
 	$address = test_input( ( $_POST["address"] ) );
@@ -33,36 +37,34 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
 	//Patient language
 	$lang = test_input( ( $_POST["lang"] ) );
+
 }
 
 //Insert into DB
 if ( isset( $_POST["register"] ) ) {
 
 	$sql = "INSERT INTO patient(id, fname, lname, gender, email, password, address, lang) 
-VALUES ('$id', '$fname', '$lname', '$gender', '$email', '$pwd', '$address','$lang')";
-	echo sql;
+VALUES ('$id', '$fname', '$lname', '$gender', '$email', '$hashed_password', '$address','$lang')";
 
 	//Check if id and email unique
-	$sql_stmt = "SELECT id, email FROM patient WHERE id = '$id' OR email = '$email' ";
+	$sql_stmt = "SELECT id, email FROM `patient` WHERE id = '$id' OR email = '$email'";
+	echo $sql_stmt;
+	$result   = $conn->query($sql_stmt);
 
 }
+if ( $result === false) {
+	user_error("Query failed " .$conn->error. "<br>");
+}
+if ( $result->num_rows <= 0 && $conn->query( $sql ) === true ) {
 
-if ( $conn->query( $sql ) === true ) {
-	$msg = "Thank you for registration!";
-	echo "<script type='text/javascript'>alert('$msg');</script>";
-	header( "Loca   tion: index.php" );
+	header("Location: success.php");
+
 } else {
-	echo " Error";
+
+	header("Location: fail.php");
 }
+
 
 $conn->close();
 
-//Input validation
-function test_input( $data ) {
-	$data = trim( $data );
-	$data = stripcslashes( $data );
-	$data = htmlspecialchars( $data );
-
-	return $data;
-}
 
