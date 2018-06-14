@@ -458,12 +458,12 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
                                id="user_table">
                             <thead class="thead-dark">
                             <tr>
-                                <th>
+<!--                                <th>-->
 <!--                                    <button title="Delete Multiple" type="button" class="btn btn btn-danger"-->
 <!--                                            id="delete_multi_pa">-->
 <!--                                        <i class="fa fa-trash"></i>-->
 <!--                                    </button>-->
-                                </th>
+<!--                                </th>-->
                                 <th>ID</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -480,7 +480,6 @@ if (! isset( $_SESSION['login_hos'] ) && ! isset( $_SESSION['login_admin'] ) ) {
                             <tr id="new_row">
                                 <div class="form-row">
                                     <div class="form-group">
-                                        <td></td>
                                         <td><input required type="text" id="new_id"></td>
                                         <td><input required type="text" id="new_fname"></td>
                                         <td><input required type="text" id="new_lname"></td>
